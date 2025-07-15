@@ -4,6 +4,12 @@
 	(generator_version "9.0")
 	(uuid "63796ae2-cb35-4340-99cd-98744a98952a")
 	(paper "A4")
+	(title_block
+		(title "Power")
+		(date "2025-07-15")
+		(rev "V0.1")
+		(company "Afonso Muralha")
+	)
 	(lib_symbols
 		(symbol "Battery_Management:DW01A"
 			(exclude_from_sim no)
@@ -3457,12 +3463,6 @@
 		(uuid "39cfa4ae-7465-45c5-8818-2abb13f0fbfe")
 	)
 	(junction
-		(at 73.66 55.88)
-		(diameter 0)
-		(color 0 0 0 0)
-		(uuid "422863f2-e213-4d86-b94c-9f28c0d04b88")
-	)
-	(junction
 		(at 33.02 124.46)
 		(diameter 0)
 		(color 0 0 0 0)
@@ -3473,6 +3473,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "487bb858-87df-4a31-aa0a-f807793bbbbd")
+	)
+	(junction
+		(at 73.66 55.88)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "49867086-5392-4861-bb2d-5a7caf49d7ba")
 	)
 	(junction
 		(at 73.66 135.89)
@@ -3920,7 +3926,7 @@
 	)
 	(wire
 		(pts
-			(xy 73.66 55.88) (xy 73.66 69.85)
+			(xy 73.66 54.61) (xy 73.66 55.88)
 		)
 		(stroke
 			(width 0)
@@ -4107,16 +4113,6 @@
 			(type default)
 		)
 		(uuid "7ddfbc4b-5840-40ea-b331-a52722668f4e")
-	)
-	(wire
-		(pts
-			(xy 73.66 54.61) (xy 73.66 55.88)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "81659b92-89ed-4821-941c-f35ae87d595a")
 	)
 	(wire
 		(pts
@@ -4317,6 +4313,16 @@
 			(type default)
 		)
 		(uuid "aeed95c6-11f2-4a2a-baa8-2c11e379258b")
+	)
+	(wire
+		(pts
+			(xy 73.66 55.88) (xy 73.66 69.85)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b9f74134-4015-433b-b3e6-cea52a5ed07c")
 	)
 	(wire
 		(pts
@@ -4587,7 +4593,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "068d1e44-e9fa-4444-9926-a1635d296cc8")
-		(property "Reference" "#PWR062"
+		(property "Reference" "#PWR084"
 			(at 162.56 72.39 0)
 			(effects
 				(font
@@ -4637,7 +4643,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "#PWR062")
+					(reference "#PWR084")
 					(unit 1)
 				)
 			)
@@ -4652,7 +4658,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "0946cd72-40dd-49f1-9ed6-44d2caec7f5a")
-		(property "Reference" "#PWR063"
+		(property "Reference" "#PWR073"
 			(at 29.21 91.44 0)
 			(effects
 				(font
@@ -4702,7 +4708,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "#PWR063")
+					(reference "#PWR073")
 					(unit 1)
 				)
 			)
@@ -4717,7 +4723,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "27e64db9-5841-4ee1-a873-f1651b4083d4")
-		(property "Reference" "#PWR054"
+		(property "Reference" "#PWR080"
 			(at 118.11 71.12 0)
 			(effects
 				(font
@@ -4767,7 +4773,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "#PWR054")
+					(reference "#PWR080")
 					(unit 1)
 				)
 			)
@@ -4783,7 +4789,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "28d3e1da-d69d-4e77-a94b-c3f1c58666f7")
-		(property "Reference" "R20"
+		(property "Reference" "R35"
 			(at 59.69 35.5599 0)
 			(effects
 				(font
@@ -4801,7 +4807,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 57.15 36.83 0)
 			(effects
 				(font
@@ -4837,7 +4843,7 @@
 		(instances
 			(project ""
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "R20")
+					(reference "R35")
 					(unit 1)
 				)
 			)
@@ -4852,7 +4858,7 @@
 		(on_board yes)
 		(dnp yes)
 		(uuid "2ebed542-b3b6-4a98-9b2e-f5d8418b8178")
-		(property "Reference" "R26"
+		(property "Reference" "R34"
 			(at 31.75 81.026 90)
 			(effects
 				(font
@@ -4868,7 +4874,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 35.56 82.55 0)
 			(effects
 				(font
@@ -4904,7 +4910,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "R26")
+					(reference "R34")
 					(unit 1)
 				)
 			)
@@ -4920,7 +4926,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "31326cfc-8af7-4d76-bdb5-b62bd4f519a8")
-		(property "Reference" "C1"
+		(property "Reference" "C25"
 			(at 62.23 142.2462 0)
 			(effects
 				(font
@@ -4983,7 +4989,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "C1")
+					(reference "C25")
 					(unit 1)
 				)
 			)
@@ -4999,7 +5005,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3348f4c9-39ce-415b-acd0-788abdc57053")
-		(property "Reference" "#PWR060"
+		(property "Reference" "#PWR090"
 			(at 251.46 50.8 0)
 			(effects
 				(font
@@ -5049,7 +5055,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "#PWR060")
+					(reference "#PWR090")
 					(unit 1)
 				)
 			)
@@ -5065,7 +5071,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "34d7d92e-dd19-4fc0-8627-758f109fa16e")
-		(property "Reference" "R24"
+		(property "Reference" "R39"
 			(at 181.61 44.4499 0)
 			(effects
 				(font
@@ -5083,7 +5089,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 179.07 45.72 0)
 			(effects
 				(font
@@ -5119,7 +5125,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "R24")
+					(reference "R39")
 					(unit 1)
 				)
 			)
@@ -5134,7 +5140,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "3b32d023-d6d0-4706-b308-9925cd0fa691")
-		(property "Reference" "#PWR0104"
+		(property "Reference" "#PWR078"
 			(at 68.58 161.29 0)
 			(effects
 				(font
@@ -5184,7 +5190,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "#PWR0104")
+					(reference "#PWR078")
 					(unit 1)
 				)
 			)
@@ -5280,7 +5286,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "3de41a00-c4cb-4111-b64e-8a37779db308")
-		(property "Reference" "U6"
+		(property "Reference" "U5"
 			(at 220.5833 39.37 0)
 			(effects
 				(font
@@ -5346,7 +5352,7 @@
 		(instances
 			(project ""
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "U6")
+					(reference "U5")
 					(unit 1)
 				)
 			)
@@ -5362,7 +5368,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "402ecf56-19f6-4230-be95-d4b8888909dc")
-		(property "Reference" "R23"
+		(property "Reference" "R41"
 			(at 231.14 60.9599 0)
 			(effects
 				(font
@@ -5380,7 +5386,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 228.6 62.23 0)
 			(effects
 				(font
@@ -5416,7 +5422,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "R23")
+					(reference "R41")
 					(unit 1)
 				)
 			)
@@ -5432,7 +5438,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "4a64375e-1b82-4d10-8f97-3145349750e6")
-		(property "Reference" "R25"
+		(property "Reference" "R42"
 			(at 241.3 60.9599 0)
 			(effects
 				(font
@@ -5450,7 +5456,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 238.76 62.23 0)
 			(effects
 				(font
@@ -5486,7 +5492,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "R25")
+					(reference "R42")
 					(unit 1)
 				)
 			)
@@ -5502,7 +5508,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "54cc807f-956f-4989-9388-60defc6ef282")
-		(property "Reference" "U101"
+		(property "Reference" "U4"
 			(at 88.9 165.1 0)
 			(effects
 				(font
@@ -5518,7 +5524,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Bongo-Cat-Fidget-Toy:VREG_TPS63802DLAR"
+		(property "Footprint" "TamagotchiThing:VREG_TPS63802DLAR"
 			(at 88.9 146.05 0)
 			(effects
 				(font
@@ -5718,7 +5724,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "U101")
+					(reference "U4")
 					(unit 1)
 				)
 			)
@@ -5734,7 +5740,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "55670354-be4a-4c40-92fe-2465bfe7f831")
-		(property "Reference" "#PWR058"
+		(property "Reference" "#PWR086"
 			(at 218.44 44.45 0)
 			(effects
 				(font
@@ -5784,7 +5790,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "#PWR058")
+					(reference "#PWR086")
 					(unit 1)
 				)
 			)
@@ -5799,7 +5805,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "674f7882-72c1-4833-95ad-02a39336ab06")
-		(property "Reference" "#PWR0105"
+		(property "Reference" "#PWR081"
 			(at 121.92 160.02 0)
 			(effects
 				(font
@@ -5849,7 +5855,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "#PWR0105")
+					(reference "#PWR081")
 					(unit 1)
 				)
 			)
@@ -5865,7 +5871,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "6f386e3d-f94b-4fa0-8473-d8b0e526ff4a")
-		(property "Reference" "#PWR053"
+		(property "Reference" "#PWR079"
 			(at 118.11 35.56 0)
 			(effects
 				(font
@@ -5915,7 +5921,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "#PWR053")
+					(reference "#PWR079")
 					(unit 1)
 				)
 			)
@@ -5930,7 +5936,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "7590c3e9-9e3a-4ced-b136-b119fde18c6e")
-		(property "Reference" "#PWR052"
+		(property "Reference" "#PWR077"
 			(at 59.69 161.29 0)
 			(effects
 				(font
@@ -5980,7 +5986,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "#PWR052")
+					(reference "#PWR077")
 					(unit 1)
 				)
 			)
@@ -5995,7 +6001,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "76c88018-132b-496f-9501-a48afd8a621a")
-		(property "Reference" "#PWR055"
+		(property "Reference" "#PWR075"
 			(at 40.64 69.85 0)
 			(effects
 				(font
@@ -6045,7 +6051,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "#PWR055")
+					(reference "#PWR075")
 					(unit 1)
 				)
 			)
@@ -6061,7 +6067,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7964b008-0b95-4bd6-864f-79cbef0ca0d4")
-		(property "Reference" "C2"
+		(property "Reference" "C26"
 			(at 129.54 143.5163 0)
 			(effects
 				(font
@@ -6124,7 +6130,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "C2")
+					(reference "C26")
 					(unit 1)
 				)
 			)
@@ -6140,7 +6146,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "79a2d9ea-7154-4215-8565-5e416cfbc4e9")
-		(property "Reference" "R5"
+		(property "Reference" "R33"
 			(at 25.4 142.2399 0)
 			(effects
 				(font
@@ -6149,7 +6155,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10k"
+		(property "Value" "100k"
 			(at 25.4 144.7799 0)
 			(effects
 				(font
@@ -6194,7 +6200,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C103199 "
+		(property "LCSC" ""
 			(at 22.86 143.51 0)
 			(effects
 				(font
@@ -6212,7 +6218,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "R5")
+					(reference "R33")
 					(unit 1)
 				)
 			)
@@ -6228,7 +6234,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "7bb8bb42-e6e4-4658-871b-8a1890155914")
-		(property "Reference" "#PWR051"
+		(property "Reference" "#PWR085"
 			(at 179.07 45.72 0)
 			(effects
 				(font
@@ -6278,7 +6284,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "#PWR051")
+					(reference "#PWR085")
 					(unit 1)
 				)
 			)
@@ -6293,7 +6299,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "80695e38-5ba7-4577-baf6-2e796f4a70ee")
-		(property "Reference" "L102"
+		(property "Reference" "L2"
 			(at 88.9 120.65 90)
 			(effects
 				(font
@@ -6363,7 +6369,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "L102")
+					(reference "L2")
 					(unit 1)
 				)
 			)
@@ -6379,7 +6385,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "8b375875-6ac2-4687-9aed-f856e7313ce9")
-		(property "Reference" "#PWR06"
+		(property "Reference" "#PWR082"
 			(at 137.16 139.7 0)
 			(effects
 				(font
@@ -6429,7 +6435,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "#PWR06")
+					(reference "#PWR082")
 					(unit 1)
 				)
 			)
@@ -6522,7 +6528,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "909ea4f2-9fda-4938-bbdf-69193c6c82b5")
-		(property "Reference" "#PWR04"
+		(property "Reference" "#PWR071"
 			(at 22.86 125.73 0)
 			(effects
 				(font
@@ -6572,7 +6578,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "#PWR04")
+					(reference "#PWR071")
 					(unit 1)
 				)
 			)
@@ -6588,7 +6594,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "938ca2ba-f22e-4c2b-8999-fe3dcd185e51")
-		(property "Reference" "D2"
+		(property "Reference" "D3"
 			(at 195.453 38.1 0)
 			(effects
 				(font
@@ -6604,7 +6610,7 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "TamagotchiThing:LED-SMD_4P-L1.6-W1.5-TL-1"
 			(at 196.342 49.53 0)
 			(effects
 				(font
@@ -6655,7 +6661,7 @@
 		(instances
 			(project ""
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "D2")
+					(reference "D3")
 					(unit 1)
 				)
 			)
@@ -6670,7 +6676,7 @@
 		(on_board yes)
 		(dnp yes)
 		(uuid "966e79c6-f188-4a1f-852b-9c174c222e53")
-		(property "Reference" "D3"
+		(property "Reference" "D2"
 			(at 41.148 130.81 0)
 			(effects
 				(font
@@ -6732,7 +6738,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "D3")
+					(reference "D2")
 					(unit 1)
 				)
 			)
@@ -6748,7 +6754,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a5006d8a-669a-4b95-87db-b0847afe4657")
-		(property "Reference" "BT2"
+		(property "Reference" "BT1"
 			(at 44.45 47.6884 0)
 			(effects
 				(font
@@ -6766,7 +6772,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Bongo-Cat-Fidget-Toy:BAT-TH_CR2032-BS-6-1"
+		(property "Footprint" "Connector_JST:JST_PH_S2B-PH-K_1x02_P2.00mm_Horizontal"
 			(at 40.64 48.006 90)
 			(effects
 				(font
@@ -6811,7 +6817,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "BT2")
+					(reference "BT1")
 					(unit 1)
 				)
 			)
@@ -6827,7 +6833,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "a7b50594-53f3-43ee-a9df-a63d0be82fd4")
-		(property "Reference" "R4"
+		(property "Reference" "R38"
 			(at 119.38 148.5899 0)
 			(effects
 				(font
@@ -6890,7 +6896,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "R4")
+					(reference "R38")
 					(unit 1)
 				)
 			)
@@ -6905,7 +6911,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "a834a1c0-0bbf-40b5-bcef-c0aedac3ea6a")
-		(property "Reference" "#PWR056"
+		(property "Reference" "#PWR087"
 			(at 218.44 72.39 0)
 			(effects
 				(font
@@ -6955,7 +6961,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "#PWR056")
+					(reference "#PWR087")
 					(unit 1)
 				)
 			)
@@ -6971,7 +6977,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "af5691ae-ff0c-493f-bcaf-012e7ca6640e")
-		(property "Reference" "C7"
+		(property "Reference" "C24"
 			(at 59.69 43.1862 0)
 			(effects
 				(font
@@ -6989,7 +6995,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
 			(at 57.15 44.45 0)
 			(effects
 				(font
@@ -7025,7 +7031,7 @@
 		(instances
 			(project ""
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "C7")
+					(reference "C24")
 					(unit 1)
 				)
 			)
@@ -7040,7 +7046,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b087aeba-7d52-4bac-bdb0-de4cfd51aa6e")
-		(property "Reference" "#PWR059"
+		(property "Reference" "#PWR089"
 			(at 238.76 72.39 0)
 			(effects
 				(font
@@ -7090,7 +7096,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "#PWR059")
+					(reference "#PWR089")
 					(unit 1)
 				)
 			)
@@ -7105,7 +7111,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "b24c3223-e599-4edd-896e-5526c428af2f")
-		(property "Reference" "#PWR064"
+		(property "Reference" "#PWR076"
 			(at 43.18 91.44 0)
 			(effects
 				(font
@@ -7155,7 +7161,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "#PWR064")
+					(reference "#PWR076")
 					(unit 1)
 				)
 			)
@@ -7168,10 +7174,10 @@
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
-		(dnp no)
+		(dnp yes)
 		(fields_autoplaced yes)
 		(uuid "b5e56ce2-4094-4174-9b4f-2040daad7c0c")
-		(property "Reference" "R22"
+		(property "Reference" "R40"
 			(at 220.98 60.9599 0)
 			(effects
 				(font
@@ -7189,7 +7195,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 218.44 62.23 0)
 			(effects
 				(font
@@ -7225,7 +7231,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "R22")
+					(reference "R40")
 					(unit 1)
 				)
 			)
@@ -7241,7 +7247,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bc5d4fb8-b1e4-4d4d-816f-bb43abac61ed")
-		(property "Reference" "#PWR03"
+		(property "Reference" "#PWR074"
 			(at 33.02 125.73 0)
 			(effects
 				(font
@@ -7291,7 +7297,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "#PWR03")
+					(reference "#PWR074")
 					(unit 1)
 				)
 			)
@@ -7307,7 +7313,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "bf235ecc-7268-47eb-b502-6f41bd86c808")
-		(property "Reference" "R6"
+		(property "Reference" "R37"
 			(at 119.38 138.4299 0)
 			(effects
 				(font
@@ -7370,7 +7376,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "R6")
+					(reference "R37")
 					(unit 1)
 				)
 			)
@@ -7385,7 +7391,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "c1af3d52-169b-4565-a57f-96d8a22a302c")
-		(property "Reference" "#PWR057"
+		(property "Reference" "#PWR088"
 			(at 228.6 72.39 0)
 			(effects
 				(font
@@ -7435,7 +7441,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "#PWR057")
+					(reference "#PWR088")
 					(unit 1)
 				)
 			)
@@ -7451,7 +7457,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "c1f29d8b-8bbb-4da6-968b-8d3cb5d90036")
-		(property "Reference" "C14"
+		(property "Reference" "C27"
 			(at 165.1 60.9662 0)
 			(effects
 				(font
@@ -7514,7 +7520,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "C14")
+					(reference "C27")
 					(unit 1)
 				)
 			)
@@ -7530,7 +7536,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "d1ddcb43-6a64-4739-a219-dd78f9fffe6f")
-		(property "Reference" "#PWR047"
+		(property "Reference" "#PWR072"
 			(at 22.86 153.67 0)
 			(effects
 				(font
@@ -7580,7 +7586,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "#PWR047")
+					(reference "#PWR072")
 					(unit 1)
 				)
 			)
@@ -7595,7 +7601,7 @@
 		(on_board yes)
 		(dnp no)
 		(uuid "d7f208f2-e042-4a4b-aafe-9001715eba1f")
-		(property "Reference" "Q1"
+		(property "Reference" "Q3"
 			(at 27.432 127.508 0)
 			(effects
 				(font
@@ -7662,7 +7668,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "Q1")
+					(reference "Q3")
 					(unit 1)
 				)
 			)
@@ -7678,7 +7684,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "dba1263a-814a-414b-99da-fc56b3f8155b")
-		(property "Reference" "R21"
+		(property "Reference" "R36"
 			(at 102.87 50.7999 0)
 			(effects
 				(font
@@ -7696,7 +7702,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
 			(at 100.33 52.07 0)
 			(effects
 				(font
@@ -7732,7 +7738,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "R21")
+					(reference "R36")
 					(unit 1)
 				)
 			)
@@ -7740,16 +7746,16 @@
 	)
 	(symbol
 		(lib_id "Transistor_FET:DMG9926UDM")
-		(at 78.74 63.5 270)
+		(at 78.74 63.5 90)
+		(mirror x)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "dd0bc8e5-bb97-4ca9-bd0f-6287587191c3")
-		(property "Reference" "Q3"
-			(at 92.71 57.0798 90)
+		(property "Reference" "Q5"
+			(at 88.9 55.626 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7757,7 +7763,7 @@
 			)
 		)
 		(property "Value" "FS8205A"
-			(at 92.71 59.6198 90)
+			(at 88.9 58.166 90)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7765,7 +7771,7 @@
 			)
 		)
 		(property "Footprint" "Package_TO_SOT_SMD:SOT-23-6"
-			(at 74.93 66.04 0)
+			(at 82.55 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7776,7 +7782,7 @@
 			)
 		)
 		(property "Datasheet" "https://www.diodes.com/assets/Datasheets/ds31770.pdf"
-			(at 73.025 66.04 0)
+			(at 84.455 66.04 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -7815,7 +7821,7 @@
 		(instances
 			(project ""
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "Q3")
+					(reference "Q5")
 					(unit 1)
 				)
 			)
@@ -7831,7 +7837,7 @@
 		(dnp no)
 		(fields_autoplaced yes)
 		(uuid "e0e90329-526e-4128-bcc7-cc0e43c41f75")
-		(property "Reference" "#PWR061"
+		(property "Reference" "#PWR083"
 			(at 162.56 62.23 0)
 			(effects
 				(font
@@ -7881,7 +7887,7 @@
 		(instances
 			(project "Tamagotchi-thing"
 				(path "/12313484-12fb-46bc-b1d8-af4ffc4cdc53/fb85a431-6246-4f25-9bf0-d572b0a7405d"
-					(reference "#PWR061")
+					(reference "#PWR083")
 					(unit 1)
 				)
 			)
@@ -7998,7 +8004,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "Bongo-Cat-Fidget-Toy:SW-SMD_SK-3245S-L1-A-1"
+		(property "Footprint" "TamagotchiThing:SW-SMD_SK-3245S-L1-A-1"
 			(at 50.8 123.19 0)
 			(effects
 				(font

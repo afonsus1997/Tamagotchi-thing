@@ -4,10 +4,16 @@
 	(generator_version "9.0")
 	(uuid "12313484-12fb-46bc-b1d8-af4ffc4cdc53")
 	(paper "A4")
+	(title_block
+		(title "Tamagotchi Thing")
+		(date "2025-07-15")
+		(rev "V0.1")
+		(company "Afonso Muralha")
+	)
 	(lib_symbols)
 	(bus
 		(pts
-			(xy 125.73 106.68) (xy 134.62 106.68)
+			(xy 138.43 105.41) (xy 147.32 105.41)
 		)
 		(stroke
 			(width 0)
@@ -17,7 +23,7 @@
 	)
 	(bus
 		(pts
-			(xy 125.73 100.33) (xy 134.62 100.33)
+			(xy 138.43 99.06) (xy 147.32 99.06)
 		)
 		(stroke
 			(width 0)
@@ -27,7 +33,7 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 115.57) (xy 134.62 115.57)
+			(xy 138.43 114.3) (xy 147.32 114.3)
 		)
 		(stroke
 			(width 0)
@@ -37,7 +43,7 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 118.11) (xy 134.62 118.11)
+			(xy 138.43 116.84) (xy 147.32 116.84)
 		)
 		(stroke
 			(width 0)
@@ -47,7 +53,7 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 102.87) (xy 134.62 102.87)
+			(xy 138.43 101.6) (xy 147.32 101.6)
 		)
 		(stroke
 			(width 0)
@@ -57,7 +63,7 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 120.65) (xy 134.62 120.65)
+			(xy 138.43 119.38) (xy 147.32 119.38)
 		)
 		(stroke
 			(width 0)
@@ -67,7 +73,7 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 123.19) (xy 134.62 123.19)
+			(xy 138.43 121.92) (xy 147.32 121.92)
 		)
 		(stroke
 			(width 0)
@@ -77,7 +83,7 @@
 	)
 	(wire
 		(pts
-			(xy 125.73 109.22) (xy 134.62 109.22)
+			(xy 138.43 107.95) (xy 147.32 107.95)
 		)
 		(stroke
 			(width 0)
@@ -87,7 +93,7 @@
 	)
 	(bus
 		(pts
-			(xy 125.73 113.03) (xy 134.62 113.03)
+			(xy 138.43 111.76) (xy 147.32 111.76)
 		)
 		(stroke
 			(width 0)
@@ -96,7 +102,7 @@
 		(uuid "e9848b05-b25c-4314-b6e3-9b73e7d19888")
 	)
 	(sheet
-		(at 96.52 96.52)
+		(at 109.22 95.25)
 		(size 29.21 30.48)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -112,7 +118,7 @@
 		)
 		(uuid "17b878c8-4ec7-4be9-a45c-e37b0b8bbe31")
 		(property "Sheetname" "MCU"
-			(at 96.52 95.8084 0)
+			(at 109.22 94.5384 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -121,7 +127,7 @@
 			)
 		)
 		(property "Sheetfile" "sch/mcu.kicad_sch"
-			(at 96.52 127.5846 0)
+			(at 109.22 126.3146 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -130,7 +136,7 @@
 			)
 		)
 		(pin "LCD2_BL_EN" bidirectional
-			(at 125.73 123.19 0)
+			(at 138.43 121.92 0)
 			(uuid "1d4578bb-decf-43af-b4f2-958d9cc30569")
 			(effects
 				(font
@@ -140,7 +146,7 @@
 			)
 		)
 		(pin "LCD2_CS" bidirectional
-			(at 125.73 115.57 0)
+			(at 138.43 114.3 0)
 			(uuid "5b7c7a61-8fe2-46a4-b381-fab015353382")
 			(effects
 				(font
@@ -150,7 +156,7 @@
 			)
 		)
 		(pin "LCD_BL_EN" bidirectional
-			(at 125.73 102.87 0)
+			(at 138.43 101.6 0)
 			(uuid "0db8e0aa-05e5-4237-950b-279455b1aec1")
 			(effects
 				(font
@@ -160,7 +166,7 @@
 			)
 		)
 		(pin "LCD{LCD}" bidirectional
-			(at 125.73 100.33 0)
+			(at 138.43 99.06 0)
 			(uuid "f31bc3d3-0901-45ed-9f44-52ad4f2ec2d7")
 			(effects
 				(font
@@ -170,7 +176,7 @@
 			)
 		)
 		(pin "OLED{I2C}" bidirectional
-			(at 125.73 106.68 0)
+			(at 138.43 105.41 0)
 			(uuid "566b933f-fd2c-4a1d-82fc-01e09002ece3")
 			(effects
 				(font
@@ -180,7 +186,7 @@
 			)
 		)
 		(pin "LCD2{I2C}" bidirectional
-			(at 125.73 113.03 0)
+			(at 138.43 111.76 0)
 			(uuid "f44eb3f1-2d48-423c-8111-79eb3cb98b4d")
 			(effects
 				(font
@@ -190,7 +196,7 @@
 			)
 		)
 		(pin "LCD2_RES" bidirectional
-			(at 125.73 118.11 0)
+			(at 138.43 116.84 0)
 			(uuid "5bcf5c43-82dc-40ac-a53b-b84498d103a3")
 			(effects
 				(font
@@ -200,7 +206,7 @@
 			)
 		)
 		(pin "LCD2_A0" bidirectional
-			(at 125.73 120.65 0)
+			(at 138.43 119.38 0)
 			(uuid "1b517da5-49d3-47d2-9686-740deebf3daf")
 			(effects
 				(font
@@ -210,7 +216,7 @@
 			)
 		)
 		(pin "OLED_RST" bidirectional
-			(at 125.73 109.22 0)
+			(at 138.43 107.95 0)
 			(uuid "69d4d9e9-0cdb-489a-bf67-3887d07156a1")
 			(effects
 				(font
@@ -228,7 +234,7 @@
 		)
 	)
 	(sheet
-		(at 134.62 96.52)
+		(at 147.32 95.25)
 		(size 29.21 30.48)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -244,7 +250,7 @@
 		)
 		(uuid "d9f98e41-f829-4900-ad19-97f536836ce0")
 		(property "Sheetname" "OLED"
-			(at 134.62 95.8084 0)
+			(at 147.32 94.5384 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -253,7 +259,7 @@
 			)
 		)
 		(property "Sheetfile" "sch/OLED.kicad_sch"
-			(at 134.62 127.5846 0)
+			(at 147.32 126.3146 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -262,7 +268,7 @@
 			)
 		)
 		(pin "LCD{LCD}" bidirectional
-			(at 134.62 100.33 180)
+			(at 147.32 99.06 180)
 			(uuid "248d5305-fcf5-43fa-9809-d1b754b4175f")
 			(effects
 				(font
@@ -272,7 +278,7 @@
 			)
 		)
 		(pin "LCD_BL_EN" bidirectional
-			(at 134.62 102.87 180)
+			(at 147.32 101.6 180)
 			(uuid "e6d32b85-b86d-4e53-a561-c608e3b832ba")
 			(effects
 				(font
@@ -282,7 +288,7 @@
 			)
 		)
 		(pin "LCD2{I2C}" bidirectional
-			(at 134.62 113.03 180)
+			(at 147.32 111.76 180)
 			(uuid "4f2f9d29-403c-4839-8bff-70b99cde8adb")
 			(effects
 				(font
@@ -292,7 +298,7 @@
 			)
 		)
 		(pin "LCD2_A0" bidirectional
-			(at 134.62 120.65 180)
+			(at 147.32 119.38 180)
 			(uuid "02e2afd5-7313-475d-9c1c-5310c1d6f869")
 			(effects
 				(font
@@ -302,7 +308,7 @@
 			)
 		)
 		(pin "LCD2_CS" bidirectional
-			(at 134.62 115.57 180)
+			(at 147.32 114.3 180)
 			(uuid "29f7b000-c96e-4bc4-9497-e3ccffb81139")
 			(effects
 				(font
@@ -312,7 +318,7 @@
 			)
 		)
 		(pin "LCD2_BL_EN" bidirectional
-			(at 134.62 123.19 180)
+			(at 147.32 121.92 180)
 			(uuid "e3bbad50-af79-4b63-aab6-3312407264b7")
 			(effects
 				(font
@@ -322,7 +328,7 @@
 			)
 		)
 		(pin "LCD2_RES" bidirectional
-			(at 134.62 118.11 180)
+			(at 147.32 116.84 180)
 			(uuid "0340900a-94a3-4f22-a0ef-b5314a74bf5c")
 			(effects
 				(font
@@ -332,7 +338,7 @@
 			)
 		)
 		(pin "OLED{I2C}" bidirectional
-			(at 134.62 106.68 180)
+			(at 147.32 105.41 180)
 			(uuid "e9d3d9ab-7b5b-4292-90fd-757539584d61")
 			(effects
 				(font
@@ -342,7 +348,7 @@
 			)
 		)
 		(pin "OLED_RST" bidirectional
-			(at 134.62 109.22 180)
+			(at 147.32 107.95 180)
 			(uuid "5c9fb026-947a-48a1-add6-21d07628976d")
 			(effects
 				(font
@@ -360,7 +366,7 @@
 		)
 	)
 	(sheet
-		(at 115.57 66.04)
+		(at 124.46 66.04)
 		(size 30.48 16.51)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -376,7 +382,7 @@
 		)
 		(uuid "fb85a431-6246-4f25-9bf0-d572b0a7405d")
 		(property "Sheetname" "Power"
-			(at 115.57 65.3284 0)
+			(at 124.46 65.3284 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -385,7 +391,7 @@
 			)
 		)
 		(property "Sheetfile" "sch/power.kicad_sch"
-			(at 115.57 83.1346 0)
+			(at 124.46 83.1346 0)
 			(effects
 				(font
 					(size 1.27 1.27)
