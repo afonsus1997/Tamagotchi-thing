@@ -4877,6 +4877,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C106232"
+			(at 57.15 36.83 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "60976b6f-956f-48f4-81be-a52fb2780b67")
 		)
@@ -4944,6 +4953,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C106231"
+			(at 35.56 82.55 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "20cdeca5-7b74-48b4-9f08-b84b516f89a1")
 		)
@@ -4978,7 +4996,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10u"
+		(property "Value" "10uF"
 			(at 62.23 144.7862 0)
 			(effects
 				(font
@@ -5015,6 +5033,15 @@
 			)
 		)
 		(property "LCSC" "C95839"
+			(at 59.69 143.51 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Voltage" "6.3"
 			(at 59.69 143.51 0)
 			(effects
 				(font
@@ -5159,6 +5186,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C60488"
+			(at 179.07 45.72 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "7e99f63e-6624-4136-8964-5c20fd450d23")
 		)
@@ -5292,6 +5328,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C2927799"
+			(at 78.74 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "5"
 			(uuid "83d63e40-1ad2-4e78-920b-532c9eed27f6")
 		)
@@ -5374,6 +5419,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C725791"
+			(at 218.44 49.53 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "2"
 			(uuid "bd2d8979-751d-42c2-8033-168fbbe6bf71")
 		)
@@ -5448,6 +5502,15 @@
 			)
 		)
 		(property "Description" "Resistor, small US symbol"
+			(at 238.76 55.88 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C185451"
 			(at 238.76 55.88 0)
 			(effects
 				(font
@@ -6049,7 +6112,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "22u"
+		(property "Value" "22uF"
 			(at 129.54 146.0563 0)
 			(effects
 				(font
@@ -6086,6 +6149,15 @@
 			)
 		)
 		(property "LCSC" "C59461"
+			(at 127 144.78 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Voltage" "6.3"
 			(at 127 144.78 0)
 			(effects
 				(font
@@ -6173,7 +6245,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" ""
+		(property "LCSC" "C60491"
 			(at 22.86 143.51 0)
 			(effects
 				(font
@@ -6639,7 +6711,7 @@
 		(at 40.64 49.53 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(fields_autoplaced yes)
@@ -6689,7 +6761,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C70377"
+		(property "LCSC" ""
 			(at 40.64 49.53 0)
 			(effects
 				(font
@@ -6839,6 +6911,15 @@
 			)
 		)
 		(property "Description" "Unpolarized capacitor, small symbol"
+			(at 57.15 44.45 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2180552"
 			(at 57.15 44.45 0)
 			(effects
 				(font
@@ -7221,7 +7302,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "10u"
+		(property "Value" "10uF"
 			(at 165.1 63.5062 0)
 			(effects
 				(font
@@ -7258,6 +7339,15 @@
 			)
 		)
 		(property "LCSC" "C95839"
+			(at 162.56 62.23 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Voltage" "6.3"
 			(at 162.56 62.23 0)
 			(effects
 				(font
@@ -7484,6 +7574,15 @@
 				(hide yes)
 			)
 		)
+		(property "LCSC" "C106235"
+			(at 100.33 52.07 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
 		(pin "1"
 			(uuid "03c6bd7e-111e-4c19-aac6-32cb4461ff70")
 		)
@@ -7548,6 +7647,15 @@
 		)
 		(property "Description" "4.2A Id, 20V Vds, Common-Drain, Dual Half Bridge N-Channel MOSFET, 28mOhm Ron, SOT-23-6"
 			(at 78.74 63.5 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "LCSC" "C2830320"
+			(at 78.74 63.5 90)
 			(effects
 				(font
 					(size 1.27 1.27)
