@@ -5308,9 +5308,9 @@
 		(at 64.77 82.55 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(uuid "00000000-0000-0000-0000-0000615358e1")
 		(property "Reference" "C3"
 			(at 67.1068 81.3816 0)
@@ -5330,7 +5330,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 64.77 82.55 0)
 			(effects
 				(font
@@ -5356,7 +5356,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C12530"
+		(property "LCSC" ""
 			(at 64.77 82.55 0)
 			(effects
 				(font
@@ -5394,9 +5394,9 @@
 		(at 125.73 90.17 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(uuid "00000000-0000-0000-0000-00006157d563")
 		(property "Reference" "J4"
 			(at 127.762 90.3732 0)
@@ -5416,7 +5416,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "OpenTama:LCD_14p_0.6mm"
+		(property "Footprint" "TamagotchiThing:LCD_14p_0.6mm"
 			(at 125.73 90.17 0)
 			(effects
 				(font
@@ -5516,9 +5516,9 @@
 		(at 74.93 68.58 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(uuid "00000000-0000-0000-0000-000061621389")
 		(property "Reference" "R5"
 			(at 76.4286 67.4116 0)
@@ -5538,7 +5538,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 74.93 68.58 0)
 			(effects
 				(font
@@ -5691,7 +5691,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 217.17 120.65 0)
 			(effects
 				(font
@@ -5718,7 +5718,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C23630"
+		(property "LCSC" ""
 			(at 217.17 120.65 0)
 			(effects
 				(font
@@ -5767,7 +5767,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 40.64 143.51 0)
 			(effects
 				(font
@@ -5794,7 +5794,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C23150"
+		(property "LCSC" ""
 			(at 40.64 143.51 90)
 			(effects
 				(font
@@ -5976,7 +5976,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 63.5 175.26 0)
 			(effects
 				(font
@@ -6062,7 +6062,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 232.41 115.57 0)
 			(effects
 				(font
@@ -6089,7 +6089,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C23150"
+		(property "LCSC" ""
 			(at 232.41 115.57 90)
 			(effects
 				(font
@@ -6140,7 +6140,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 95.25 154.94 0)
 			(effects
 				(font
@@ -6213,9 +6213,9 @@
 		(at 100.33 90.17 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(uuid "33cfda9b-7918-4d6a-90c5-f243831f15fc")
 		(property "Reference" "J2"
 			(at 102.362 90.3732 0)
@@ -6235,7 +6235,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "OpenTama:Hirose_FH34SRJ-14S-0.5SH_1x14-1MP_P0.50mm_Horizontal"
+		(property "Footprint" "TamagotchiThing:Hirose_FH34SRJ-14S-0.5SH_1x14-1MP_P0.50mm_Horizontal"
 			(at 100.33 90.17 0)
 			(effects
 				(font
@@ -6357,7 +6357,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 193.04 82.55 0)
 			(effects
 				(font
@@ -6384,7 +6384,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C25803"
+		(property "LCSC" ""
 			(at 193.04 82.55 0)
 			(effects
 				(font
@@ -6436,7 +6436,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 223.52 74.93 0)
 			(effects
 				(font
@@ -6463,7 +6463,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C23630"
+		(property "LCSC" ""
 			(at 223.52 74.93 0)
 			(effects
 				(font
@@ -6868,7 +6868,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 226.06 123.19 0)
 			(effects
 				(font
@@ -6895,7 +6895,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C23630"
+		(property "LCSC" ""
 			(at 226.06 123.19 0)
 			(effects
 				(font
@@ -6946,7 +6946,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 201.93 113.03 0)
 			(effects
 				(font
@@ -6973,7 +6973,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C23162"
+		(property "LCSC" ""
 			(at 201.93 113.03 0)
 			(effects
 				(font
@@ -7024,7 +7024,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 194.31 113.03 0)
 			(effects
 				(font
@@ -7051,7 +7051,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C23162"
+		(property "LCSC" ""
 			(at 194.31 113.03 0)
 			(effects
 				(font
@@ -7102,7 +7102,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 57.15 175.26 0)
 			(effects
 				(font
@@ -7383,7 +7383,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 231.14 54.61 0)
 			(effects
 				(font
@@ -7410,7 +7410,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C23630"
+		(property "LCSC" ""
 			(at 231.14 54.61 90)
 			(effects
 				(font
@@ -7439,9 +7439,9 @@
 		(at 80.01 63.5 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(uuid "784d0ec1-2667-48f2-8127-48329c061022")
 		(property "Reference" "Q2"
 			(at 85.1916 62.3316 0)
@@ -7618,7 +7618,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 86.36 146.05 0)
 			(effects
 				(font
@@ -7999,7 +7999,7 @@
 				(hide yes)
 			)
 		)
-		(property "Footprint" "TamagotchiThing:sh1106-1.3inch-oled"
+		(property "Footprint" "TamagotchiThing:sh1106-1.3inch-oled_1"
 			(at 242.57 87.63 0)
 			(effects
 				(font
@@ -8390,9 +8390,9 @@
 		(at 48.26 81.28 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(uuid "b60e9c76-beea-470f-8a46-63b0da82d117")
 		(property "Reference" "C1"
 			(at 50.5968 80.1116 0)
@@ -8412,7 +8412,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 48.26 81.28 0)
 			(effects
 				(font
@@ -8438,7 +8438,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C1615"
+		(property "LCSC" ""
 			(at 48.26 81.28 0)
 			(effects
 				(font
@@ -8564,7 +8564,7 @@
 				(justify right)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 209.55 69.85 0)
 			(effects
 				(font
@@ -8591,7 +8591,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C23630"
+		(property "LCSC" ""
 			(at 209.55 69.85 0)
 			(effects
 				(font
@@ -8620,9 +8620,9 @@
 		(at 54.61 87.63 0)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
+		(in_bom no)
+		(on_board no)
+		(dnp yes)
 		(uuid "c2d148d3-2bff-4b56-8045-cee9dcc27990")
 		(property "Reference" "C2"
 			(at 56.9468 86.4616 0)
@@ -8642,7 +8642,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 54.61 87.63 0)
 			(effects
 				(font
@@ -8668,7 +8668,7 @@
 				)
 			)
 		)
-		(property "LCSC" "C12530"
+		(property "LCSC" ""
 			(at 54.61 87.63 0)
 			(effects
 				(font
@@ -9232,7 +9232,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 46.99 156.21 0)
 			(effects
 				(font
@@ -9319,7 +9319,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_SMD:R_0603_1608Metric"
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
 			(at 100.33 175.26 0)
 			(effects
 				(font
@@ -9471,7 +9471,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 95.25 148.59 0)
 			(effects
 				(font
@@ -9827,7 +9827,7 @@
 				)
 			)
 		)
-		(property "Footprint" "Capacitor_SMD:C_0603_1608Metric"
+		(property "Footprint" "Capacitor_SMD:C_0402_1005Metric"
 			(at 223.52 59.69 0)
 			(effects
 				(font
@@ -9854,7 +9854,7 @@
 				(hide yes)
 			)
 		)
-		(property "LCSC" "C23630"
+		(property "LCSC" ""
 			(at 223.52 59.69 90)
 			(effects
 				(font

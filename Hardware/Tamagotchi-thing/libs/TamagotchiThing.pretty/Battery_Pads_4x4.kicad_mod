@@ -1,0 +1,159 @@
+(footprint "Battery_Pads_4x4"
+	(version 20241229)
+	(generator "pcbnew")
+	(generator_version "9.0")
+	(layer "F.Cu")
+	(descr "https://www.mouser.com/ds/2/60/RS-282G05A-SM_RT-1159762.pdf")
+	(tags "SPST button tactile switch")
+	(property "Reference" "REF**"
+		(at 0 -3 0)
+		(layer "F.SilkS")
+		(uuid "8d91545a-9e9b-44cc-ad6d-38f686a4cba6")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "Battery_Pads_4x4"
+		(at 0 3.2 0)
+		(layer "F.Fab")
+		(uuid "a7243ba1-5dfe-4f2e-8682-e59cfc9b660b")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "028bc124-6483-4007-bc02-2157905c4b0d")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "04ebe52f-b738-4857-b220-45220fcd2acc")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr smd)
+	(fp_line
+		(start -5.26 -2.25)
+		(end 5.26 -2.25)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "22464a42-3af2-4613-b6d3-04f50530cab7")
+	)
+	(fp_line
+		(start -5.26 2.25)
+		(end -5.26 -2.25)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "95a5475e-352b-432c-997e-e1cb4e8b2193")
+	)
+	(fp_line
+		(start 5.26 -2.25)
+		(end 5.26 2.25)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "94eff01f-4c82-4edb-a37d-aa13202420ce")
+	)
+	(fp_line
+		(start 5.26 2.25)
+		(end -5.26 2.25)
+		(stroke
+			(width 0.12)
+			(type solid)
+		)
+		(layer "F.SilkS")
+		(uuid "b6f40ed8-c136-47fe-ab1e-e2e472610d73")
+	)
+	(fp_line
+		(start -5.2 -2.2)
+		(end -5.2 2.2)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "58ccb82d-52eb-45de-8730-22dc270fba23")
+	)
+	(fp_line
+		(start -5.2 -2.2)
+		(end 5.2 -2.2)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "359f5f45-ce36-4911-ab95-b11de04151fe")
+	)
+	(fp_line
+		(start -5.2 2.2)
+		(end 5.2 2.2)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "fec0c1f6-465d-4aed-b2f5-a6a31fa3e6ce")
+	)
+	(fp_line
+		(start 5.2 -2.2)
+		(end 5.2 2.2)
+		(stroke
+			(width 0.1)
+			(type solid)
+		)
+		(layer "F.Fab")
+		(uuid "0a633d7c-c78e-4c43-b422-18a88f132efc")
+	)
+	(fp_text user "${REFERENCE}"
+		(at 0 -3 0)
+		(layer "F.Fab")
+		(uuid "77c53439-5b9d-41bb-b7c2-8767f2938a75")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(pad "1" smd rect
+		(at -3 0)
+		(size 4 4)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "f9dde348-f60f-45ce-a22f-ca516dff68c3")
+	)
+	(pad "2" smd rect
+		(at 3 0)
+		(size 4 4)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(uuid "d35e2a52-ec1e-4284-96c2-c15ed1801fc7")
+	)
+	(embedded_fonts no)
+)
