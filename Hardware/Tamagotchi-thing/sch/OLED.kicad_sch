@@ -7822,7 +7822,7 @@
 		(mirror y)
 		(unit 1)
 		(exclude_from_sim no)
-		(in_bom yes)
+		(in_bom no)
 		(on_board yes)
 		(dnp no)
 		(uuid "9c34fe15-f281-4b5b-ab46-e0e0e9c29a18")
@@ -7844,7 +7844,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "OpenTama:LCD_14p_0.6mm"
+		(property "Footprint" "Resistor_SMD:R_1210_3225Metric"
 			(at 31.75 143.51 0)
 			(effects
 				(font

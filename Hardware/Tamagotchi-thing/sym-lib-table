@@ -1,0 +1,4 @@
+(sym_lib_table
+  (version 7)
+  (lib (name "TamagotchiThing")(type "KiCad")(uri "${KIPRJMOD}/libs/TamagotchiThing.kicad_sym")(options "")(descr ""))
+)

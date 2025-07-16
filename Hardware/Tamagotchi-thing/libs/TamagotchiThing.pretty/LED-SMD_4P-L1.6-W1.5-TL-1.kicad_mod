@@ -142,29 +142,33 @@
 			)
 		)
 	)
-	(pad "1" smd rect
+	(pad "1" smd roundrect
 		(at -0.63 -0.42 180)
 		(size 0.65 0.65)
 		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
 		(uuid "ff285f5c-cdc5-43e9-a94b-18a46a78026d")
 	)
-	(pad "2" smd rect
-		(at 0.63 -0.42 180)
-		(size 0.65 0.65)
-		(layers "F.Cu" "F.Mask" "F.Paste")
-		(uuid "cb525394-c665-47e1-bb6d-e3e89027ad55")
-	)
-	(pad "3" smd rect
+	(pad "2" smd roundrect
 		(at -0.63 0.42 180)
 		(size 0.65 0.65)
 		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
 		(uuid "fe3dee46-8bcd-4384-9b8c-473b27646cd3")
 	)
-	(pad "4" smd rect
+	(pad "3" smd roundrect
 		(at 0.63 0.42 180)
 		(size 0.65 0.65)
 		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
 		(uuid "84946c76-3131-4c9a-ae17-ffedbf6dab63")
+	)
+	(pad "4" smd roundrect
+		(at 0.63 -0.42 180)
+		(size 0.65 0.65)
+		(layers "F.Cu" "F.Mask" "F.Paste")
+		(roundrect_rratio 0.25)
+		(uuid "cb525394-c665-47e1-bb6d-e3e89027ad55")
 	)
 	(embedded_fonts no)
 	(model "${KIPRJMOD}/libs/3d/LED-SMD_4P-L1.6-W1.5-TL-1.step"
