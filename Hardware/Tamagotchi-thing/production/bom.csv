@@ -1,56 +1,39 @@
-"Reference","Qty","Value","LCSC","Voltage","DNP","Exclude from BOM","Exclude from Board","Footprint","Datasheet"
-"C1","1","330nF","C5448882","25","DNP","Excluded from BOM","Excluded from board","Capacitor_SMD:C_0402_1005Metric","~"
-"C4,C5,C6","3","1uF","","16V","","","","Capacitor_SMD:C_0402_1005Metric","~"
-"C26","1","22uF","C59461","6.3","","","","Capacitor_SMD:C_0603_1608Metric","~"
-"C25,C27","2","10uF","C95839","6.3","","","","Capacitor_SMD:C_0603_1608Metric","~"
-"C2,C3,C7,C9,C10,C11,C12","7","2.2uF","C170151","6.3","DNP","Excluded from BOM","Excluded from board","Capacitor_SMD:C_0402_1005Metric","~"
-"Y1","1","32768Hz - 12,5 pF","C32346","","","","","Crystal:Crystal_SMD_3215-2Pin_3.2x1.5mm","~"
-"U5","1","TP4057","C725791","","","","","Package_TO_SOT_SMD:TSOT-23-6","http://toppwr.com/uploadfile/file/20230304/640302a47b738.pdf"
-"U4","1","TPS63802DLAR","C2845237","","","","","TamagotchiThing:VREG_TPS63802DLAR",""
-"U3","1","DW01A","C2927799","","","","","Package_TO_SOT_SMD:SOT-23-6","https://hmsemi.com/downfile/DW01A.PDF"
-"U2","1","STM32L073RBTx","C2917159","","","","","Package_QFP:LQFP-64_10x10mm_P0.5mm","https://www.st.com/resource/en/datasheet/stm32l073rb.pdf"
-"U1","1","USBLC6-2P6","C2827693","","","","","Package_TO_SOT_SMD:SOT-666","https://www.st.com/resource/en/datasheet/usblc6-2.pdf"
-"SW6","1","SW_SPDT_321","C500049","","","","","TamagotchiThing:SW-SMD_SK-3245S-L1-A-1","~"
-"SW3","1","RotaryEncoder_Switch_MP","C41430892","","DNP","Excluded from BOM","Excluded from board","TamagotchiThing:SW-SMD_SIQ-02FVS3","~"
-"SW2,SW4,SW5","3","SW_Push","","","","Excluded from BOM","","TamagotchiThing:Kailh_mouse_button","~"
-"R42","1","1.6k","C185451","","","","","Resistor_SMD:R_0402_1005Metric","~"
-"R39","1","2k","C60488","","","","","Resistor_SMD:R_0402_1005Metric","~"
-"R38","1","91k","C326721","","","","","Resistor_SMD:R_0402_1005Metric","~"
-"R37","1","511k","C2684557","","","","","Resistor_SMD:R_0402_1005Metric","~"
-"R30","1","330","C105875","","DNP","Excluded from BOM","Excluded from board","Resistor_SMD:R_0603_1608Metric","~"
-"R29","1","100k","C60491","","DNP","Excluded from BOM","Excluded from board","Resistor_SMD:R_0603_1608Metric","~"
-"R26,R36","2","1k","C106235","","","","","Resistor_SMD:R_0402_1005Metric","~"
-"R25,R35","2","100","C106232","","","","","Resistor_SMD:R_0402_1005Metric","~"
-"R23,R24","2","10k","C60490","","DNP","Excluded from BOM","Excluded from board","Resistor_SMD:R_0603_1608Metric","~"
-"R20,R34","2","0","C106231","","DNP","","","Resistor_SMD:R_0402_1005Metric","~"
-"R13,R14","2","5.1k","C407575 ","","","","","Resistor_SMD:R_0402_1005Metric","~"
-"R12,R21,R27,R31","4","330","C105875","","","","","Resistor_SMD:R_0402_1005Metric","~"
-"R11","1","100k","C25803","","","","","Resistor_SMD:R_0402_1005Metric","~"
-"R10","1","390k","C163467","","","","","Capacitor_SMD:C_0402_1005Metric","~"
-"R8,R9","2","4.7k","C93943","","","","","Capacitor_SMD:C_0402_1005Metric","~"
-"R6,R7,R15,R16,R17,R18,R19,R22,R28,R32,R33","11","100k","C60491","","","","","Resistor_SMD:R_0402_1005Metric","~"
-"R2,R3,R4,R5","4","10k","C60490","","DNP","Excluded from BOM","Excluded from board","Resistor_SMD:R_0402_1005Metric","~"
-"R1","1","15","C105871","","","","","Resistor_SMD:R_0402_1005Metric","~"
-"Q5","1","FS8205A","C2830320","","","","","Package_TO_SOT_SMD:SOT-23-6","https://www.diodes.com/assets/Datasheets/ds31770.pdf"
-"Q3,Q4","2","AO3401A","C15127","","DNP","","","Package_TO_SOT_SMD:SOT-23","~"
-"Q1,Q2","2","BSS138","C347484","","DNP","Excluded from BOM","Excluded from board","Package_TO_SOT_SMD:SOT-23","https://www.onsemi.com/pub/Collateral/BSS138-D.PDF"
-"LS1","1","Speaker_Crystal","C391035","","","","","Buzzer_Beeper:Buzzer_CUI_CPT-9019S-SMT","https://datasheet.lcsc.com/lcsc/1912111437_FUET-FUET-9018_C391035.pdf"
-"L2","1","0.47uH","C89446","","","","","Inductor_SMD_Wurth:L_Wurth_WE-LQSH-2010","~"
-"L1","1","39nH","C26443","","","","","Inductor_SMD:L_0402_1005Metric","~"
-"JP1","1","SolderJumper_2_Open","","","","Excluded from BOM","","Jumper:SolderJumper-2_P1.3mm_Open_Pad1.0x1.5mm","~"
-"J7,J8","2","Conn_01x04","C91552","","DNP","Excluded from BOM","","Connector_PinHeader_2.54mm:PinHeader_1x04_P2.54mm_Horizontal","~"
-"J6","1","USB_C_Receptacle_USB2.0"," C2894897","","","","","Connector_USB:USB_C_Receptacle_HCTL_HC-TYPE-C-16P-01A","https://www.usb.org/sites/default/files/documents/usb_type-c.zip"
-"J5","1","Conn_01x30","","","","Excluded from BOM","","TamagotchiThing:sh1106-1.3inch-oled_1","~"
-"J4","1","Conn_01x14","","","DNP","Excluded from BOM","Excluded from board","TamagotchiThing:LCD_14p_0.6mm",""
-"J3","1","Conn_01x30","C424659","","","","","TamagotchiThing:FFC-SMD_12P-P0.50_FH34SRJ-12S-0.5SH","~"
-"J2","1","Conn_01x14","C324724","","DNP","Excluded from BOM","Excluded from board","TamagotchiThing:Hirose_FH34SRJ-14S-0.5SH_1x14-1MP_P0.50mm_Horizontal","https://datasheet.lcsc.com/lcsc/1811071030_HRS-Hirose-FH34SRJ-14S-0.5SH-50_C324724.pdf"
-"J1","1","Conn_01x14","","","","Excluded from BOM","","Resistor_SMD:R_1210_3225Metric","~"
-"D3","1","LED_Dual_KKA","C965839","","","","","TamagotchiThing:LED-SMD_4P-L1.6-W1.5-TL-1","~"
-"D1,D2","2","D_Schottky","C50553","","DNP","Excluded from BOM","","Diode_SMD:D_SOD-123F","~"
-"C22","1","1uF","C15849","","","","","Capacitor_SMD:C_0603_1608Metric","~"
-"C18","1","10nF","C15195","","","","","Capacitor_SMD:C_0603_1608Metric","~"
-"C16,C17,C23","3","10nF","C15195","","DNP","Excluded from BOM","Excluded from board","Capacitor_SMD:C_0402_1005Metric","~"
-"C15,C19,C20,C21,C24,C28","6","100nF","C2180552","","","","","Capacitor_SMD:C_0402_1005Metric","~"
-"C13,C14","2","12pF","C1547","","","","","Capacitor_SMD:C_0402_1005Metric","~"
-"C8","1","4.7uF","C23733","","","","","Capacitor_SMD:C_0402_1005Metric","~"
-"BT1","1","Battery","","","","Excluded from BOM","","TamagotchiThing:Battery_Pads_4x4","~"
+Reference,Qty,Value,LCSC,Voltage,DNP,Exclude from BOM,Exclude from Board,Footprint,Datasheet
+C1,1,330nF,C5448882,25,DNP,,Excluded from board,Capacitor_SMD:C_0402_1005Metric,~
+"C4,C5,C6",3,1uF,C29266,16V,,,,Capacitor_SMD:C_0402_1005Metric,~
+C26,1,22uF,C59461,6.3,,,,Capacitor_SMD:C_0603_1608Metric,~
+"C25,C27",2,10uF,C95839,6.3,,,,Capacitor_SMD:C_0603_1608Metric,~
+Y1,1,"32768Hz - 12,5 pF",C32346,,,,,Crystal:Crystal_SMD_3215-2Pin_3.2x1.5mm,~
+U5,1,TP4057,C725791,,,,,Package_TO_SOT_SMD:TSOT-23-6,http://toppwr.com/uploadfile/file/20230304/640302a47b738.pdf
+U4,1,TPS63802DLAR,C2845237,,,,,TamagotchiThing:VREG_TPS63802DLAR,
+U3,1,DW01A,C2927799,,,,,Package_TO_SOT_SMD:SOT-23-6,https://hmsemi.com/downfile/DW01A.PDF
+U2,1,STM32L073RBTx,C2917159,,,,,Package_QFP:LQFP-64_10x10mm_P0.5mm,https://www.st.com/resource/en/datasheet/stm32l073rb.pdf
+U1,1,USBLC6-2P6,C2827693,,,,,Package_TO_SOT_SMD:SOT-666,https://www.st.com/resource/en/datasheet/usblc6-2.pdf
+SW6,1,SW_SPDT_321,C500049,,,,,TamagotchiThing:SW-SMD_SK-3245S-L1-A-1,~
+R42,1,1.6k,C185451,,,,,Resistor_SMD:R_0402_1005Metric,~
+R39,1,2k,C60488,,,,,Resistor_SMD:R_0402_1005Metric,~
+R38,1,91k,C326721,,,,,Resistor_SMD:R_0402_1005Metric,~
+R37,1,511k,C2684557,,,,,Resistor_SMD:R_0402_1005Metric,~
+"R26,R36",2,1k,C106235,,,,,Resistor_SMD:R_0402_1005Metric,~
+"R25,R35",2,100,C106232,,,,,Resistor_SMD:R_0402_1005Metric,~
+"R20,R34",2,0,C106231,,DNP,,,Resistor_SMD:R_0402_1005Metric,~
+"R13,R14",2,5.1k,C407575 ,,,,,Resistor_SMD:R_0402_1005Metric,~
+"R12,R21,R27,R31",4,330,C105875,,,,,Resistor_SMD:R_0402_1005Metric,~
+R11,1,100k,C25803,,,,,Resistor_SMD:R_0402_1005Metric,~
+R10,1,390k,C163467,,,,,Capacitor_SMD:C_0402_1005Metric,~
+"R8,R9",2,4.7k,C93943,,,,,Capacitor_SMD:C_0402_1005Metric,~
+"R6,R7,R15,R16,R17,R18,R19,R22,R28,R32,R33",11,100k,C60491,,,,,Resistor_SMD:R_0402_1005Metric,~
+R1,1,15,C105871,,,,,Resistor_SMD:R_0402_1005Metric,~
+Q5,1,FS8205A,C2830320,,,,,Package_TO_SOT_SMD:SOT-23-6,https://www.diodes.com/assets/Datasheets/ds31770.pdf
+"Q3,Q4",2,AO3401A,C15127,,DNP,,,Package_TO_SOT_SMD:SOT-23,~
+LS1,1,Speaker_Crystal,C391035,,,,,Buzzer_Beeper:Buzzer_CUI_CPT-9019S-SMT,https://datasheet.lcsc.com/lcsc/1912111437_FUET-FUET-9018_C391035.pdf
+L2,1,0.47uH,C89446,,,,,Inductor_SMD_Wurth:L_Wurth_WE-LQSH-2010,~
+L1,1,39nH,C26443,,,,,Inductor_SMD:L_0402_1005Metric,~
+J6,1,USB_C_Receptacle_USB2.0, C2894897,,,,,Connector_USB:USB_C_Receptacle_HCTL_HC-TYPE-C-16P-01A,https://www.usb.org/sites/default/files/documents/usb_type-c.zip
+J3,1,Conn_01x30,C424659,,,,,TamagotchiThing:FFC-SMD_12P-P0.50_FH34SRJ-12S-0.5SH,~
+D3,1,LED_Dual_KKA,C965839,,,,,TamagotchiThing:LED-SMD_4P-L1.6-W1.5-TL-1,~
+C22,1,1uF,C15849,,,,,Capacitor_SMD:C_0603_1608Metric,~
+C18,1,10nF,C15195,,,,,Capacitor_SMD:C_0603_1608Metric,~
+"C15,C19,C20,C21,C24,C28",6,100nF,C2180552,,,,,Capacitor_SMD:C_0402_1005Metric,~
+"C13,C14",2,12pF,C1547,,,,,Capacitor_SMD:C_0402_1005Metric,~
+C8,1,4.7uF,C23733,,,,,Capacitor_SMD:C_0402_1005Metric,~
