@@ -49,6 +49,8 @@ extern "C" {
 
 /* USER CODE END EM */
 
+void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+
 /* Exported functions prototypes ---------------------------------------------*/
 void Error_Handler(void);
 
@@ -57,6 +59,32 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define LCD2_A0_Pin GPIO_PIN_2
+#define LCD2_A0_GPIO_Port GPIOC
+#define LCD2_RES_Pin GPIO_PIN_3
+#define LCD2_RES_GPIO_Port GPIOC
+#define SW_LEFT_Pin GPIO_PIN_2
+#define SW_LEFT_GPIO_Port GPIOA
+#define SW_CENTER_Pin GPIO_PIN_3
+#define SW_CENTER_GPIO_Port GPIOA
+#define LCD2_CS_Pin GPIO_PIN_4
+#define LCD2_CS_GPIO_Port GPIOC
+#define OLED_RST_Pin GPIO_PIN_5
+#define OLED_RST_GPIO_Port GPIOC
+#define VBAT_SENSE_Pin GPIO_PIN_0
+#define VBAT_SENSE_GPIO_Port GPIOB
+#define LCD_BL_Pin GPIO_PIN_1
+#define LCD_BL_GPIO_Port GPIOB
+#define SW_RIGHT_Pin GPIO_PIN_2
+#define SW_RIGHT_GPIO_Port GPIOB
+#define LCD_DC_Pin GPIO_PIN_8
+#define LCD_DC_GPIO_Port GPIOA
+#define SPK_Pin GPIO_PIN_4
+#define SPK_GPIO_Port GPIOB
+#define LCD2_BL_Pin GPIO_PIN_5
+#define LCD2_BL_GPIO_Port GPIOB
+#define VBUS_SENSE_Pin GPIO_PIN_8
+#define VBUS_SENSE_GPIO_Port GPIOB
 
 /* USER CODE BEGIN Private defines */
 
