@@ -1,4 +1,5 @@
 #include "ui.h"
+#include "u8g2.h"
 
 
 static u8g2_t u8g2;
@@ -15,7 +16,7 @@ MUI_FORM(1)
 MUI_XYT("BN", 64, 16, " Select Me ");
 
 
-ui_init_display(){
+void ui_init_display(){
   HAL_GPIO_WritePin(OLED_RST_GPIO_Port, OLED_RST_Pin, GPIO_PIN_RESET);
   HAL_Delay(10);
   HAL_GPIO_WritePin(OLED_RST_GPIO_Port, OLED_RST_Pin, GPIO_PIN_SET);
@@ -40,7 +41,9 @@ ui_init_display(){
   mui_Init(&ui, &u8g2, &fds_data, &muif_list, sizeof(muif_list)/sizeof(muif_t));
   mui_GotoForm(&ui,/* form_id= */ 1, /* initial_cursor_position= */ 0);
   u8g2_ClearBuffer(&u8g2);
-  mui_Draw(&ui);
+  // mui_Draw(&ui);
   // u8g2_UpdateDisplay(&u8g2);
+  u8g2_DrawBox(&u8g2, 0, 0, 128, 10);
+  u8g2_DrawBox(&u8g2, 0, 10, 127, 10);
   u8g2_SendBuffer(&u8g2);
 }

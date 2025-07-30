@@ -7,4 +7,9 @@
 #include "mui_u8g2.h"
 #include "mui.h"
 
+
+void ui_init_display();
+
+
+
 #endif // UI_H

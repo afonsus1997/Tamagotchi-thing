@@ -47,11 +47,10 @@ target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     ${LIBMCU_BUTTON_SOURCES}
     ${LIBMCU_COMMON_SOURCES}
     ${LIBMCU_LOGGING_SOURCES}
-    
+    Core/Src/userio/userio.c
+    Core/Src/ui/ui.c
     Core/Src/ssd1306.c
     Core/Src/u8g2_stm32L0.c
-    Core/Src/ui.c
-    Core/Src/userio.c
 )
 
 # Add include path for U8g2 headers
@@ -60,6 +59,8 @@ target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/libmcu/libmcu/modules/button/include
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/libmcu/libmcu/modules/common/include
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/libmcu/libmcu/modules/logging/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/userio
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/ui
 )
 
 # --- U8g2 integration ends here ---
