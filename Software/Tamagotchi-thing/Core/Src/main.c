@@ -114,41 +114,28 @@ int main(void)
   // ssd1306_WriteString("Test", Font_7x10, White);
   // ssd1306_UpdateScreen();
 
-  u8g2_Setup_ssd1306_i2c_128x64_noname_1(&u8g2, U8G2_R0, u8x8_byte_hw_i2c, u8x8_stm32_gpio_and_delay_cb); // init u8g2 structure
+  u8g2_Setup_sh1106_i2c_128x64_noname_f(
+    &u8g2, 
+    U8G2_R0, 
+    u8x8_byte_hw_i2c, 
+    u8x8_stm32_gpio_and_delay_cb
+);
   u8g2_InitDisplay(&u8g2); // send init sequence to the display, display is in sleep mode after this,
   u8g2_SetPowerSave(&u8g2, 0); // wake up display
+  u8g2_ClearDisplay(&u8g2);
+  u8g2_UpdateDisplay(&u8g2);
+  u8g2_SetDrawColor(&u8g2, White);
+  u8g2_ClearBuffer(&u8g2);
 
-u8g2_SetFont(&u8g2, u8g2_font_courB10_tr);
-  u8g2_SetFontRefHeightExtendedText(&u8g2);
-  u8g2_SetDrawColor(&u8g2, 1);
-  u8g2_SetFontPosTop(&u8g2);
-  u8g2_SetFontDirection(&u8g2, 0);
-
-      u8g2_SetFontMode(&u8g2,1);	// Transparent
-    u8g2_SetDrawColor(&u8g2,1);
-
-   u8g2_SetFontDirection(&u8g2, 0);
-   u8g2_SetFont(&u8g2, u8g2_font_inb24_mf);
-   u8g2_DrawStr(&u8g2, 0, 5, "U");
-
-   u8g2_SetFontDirection(&u8g2, 1);
-   u8g2_SetFont(&u8g2, u8g2_font_inb30_mn);
-   u8g2_DrawStr(&u8g2, 51,8,"8");
-
-   u8g2_SetFontDirection(&u8g2, 0);
-   u8g2_SetFont(&u8g2, u8g2_font_inb24_mf);
-   u8g2_DrawStr(&u8g2, 51,5,"g");
-   u8g2_DrawStr(&u8g2, 67,5,"\xb2");
-
-   u8g2_DrawHLine(&u8g2, 2, 35, 47);
-   u8g2_DrawHLine(&u8g2, 3, 36, 47);
-   u8g2_DrawVLine(&u8g2, 45, 32, 12);
-   u8g2_DrawVLine(&u8g2, 46, 33, 12);
-
-   u8g2_SetFont(&u8g2, u8g2_font_5x8_tr);
-
-   u8g2_DrawStr(&u8g2, 1,54,"github.com/olikraus/u8g2");
-	
+  while(1){
+  u8g2_SetDrawColor(&u8g2, Black);
+  u8g2_DrawBox(&u8g2, 0, 0, 128, 64);
+  u8g2_UpdateDisplay(&u8g2);
+  u8g2_SetDrawColor(&u8g2, White);
+  u8g2_DrawBox(&u8g2, 0, 0, 128, 64);
+  u8g2_UpdateDisplay(&u8g2);
+    
+}
   
   /* USER CODE END 2 */
 
