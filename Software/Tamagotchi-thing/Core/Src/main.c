@@ -65,6 +65,7 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 static u8g2_t u8g2;
+// mui_t mui;
 /* USER CODE END 0 */
 
 /**
@@ -115,17 +116,23 @@ int main(void)
   // ssd1306_UpdateScreen();
 
   u8g2_Setup_sh1106_i2c_128x64_noname_f(
-    &u8g2, 
-    U8G2_R0, 
-    u8x8_byte_hw_i2c, 
+    &u8g2,
+    U8G2_R0,
+    u8x8_byte_hw_i2c,
     u8x8_stm32_gpio_and_delay_cb
-);
+  );
   u8g2_InitDisplay(&u8g2); // send init sequence to the display, display is in sleep mode after this,
   u8g2_SetPowerSave(&u8g2, 0); // wake up display
   u8g2_ClearDisplay(&u8g2);
   u8g2_UpdateDisplay(&u8g2);
   u8g2_SetDrawColor(&u8g2, White);
   u8g2_ClearBuffer(&u8g2);
+
+  // u8g2_ClearBuffer(&u8g2);
+  // mui_Draw(&mui);
+  // u8g2_SendBuffer(&u8g2);
+  // HAL_Delay(100);
+  // while(1);
 
   while(1){
   u8g2_SetDrawColor(&u8g2, Black);
