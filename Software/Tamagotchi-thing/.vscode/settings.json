@@ -19,6 +19,11 @@
     "*.rtl": "vhdl",
     "u8x8_stm32_hal.h": "c",
     "u8g2.h": "c",
-    "stm32l0xx_hal.h": "c"
+    "stm32l0xx_hal.h": "c",
+    "mui_u8g2.h": "c",
+    "ssd1306_fonts.h": "c",
+    "ui.h": "c",
+    "main.h": "c",
+    "button.h": "c"
   }
 }

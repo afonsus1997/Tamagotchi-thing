@@ -19,6 +19,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
+#include "dma.h"
 #include "i2c.h"
 #include "rtc.h"
 #include "spi.h"
@@ -31,8 +32,9 @@
 /* USER CODE BEGIN Includes */
 #include "ssd1306.h"
 #include "ssd1306_fonts.h"
-#include "u8x8_stm32_HAL.h"
-#include "u8g2.h"
+#include "ui.h"
+#include "userio.h"
+
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -64,8 +66,7 @@ void SystemClock_Config(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-static u8g2_t u8g2;
-// mui_t mui;
+
 /* USER CODE END 0 */
 
 /**
@@ -97,6 +98,7 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
+  MX_DMA_Init();
   MX_ADC_Init();
   MX_RTC_Init();
   MX_I2C2_Init();
@@ -107,42 +109,16 @@ int main(void)
   MX_USB_DEVICE_Init();
   /* USER CODE BEGIN 2 */
   // Init OLED
-  HAL_GPIO_WritePin(OLED_RST_GPIO_Port, OLED_RST_Pin, GPIO_PIN_RESET);
-  HAL_Delay(10);
-  HAL_GPIO_WritePin(OLED_RST_GPIO_Port, OLED_RST_Pin, GPIO_PIN_SET);
-  // ssd1306_Init();
-  // ssd1306_SetCursor(2, 1);
-  // ssd1306_WriteString("Test", Font_7x10, White);
-  // ssd1306_UpdateScreen();
-
-  u8g2_Setup_sh1106_i2c_128x64_noname_f(
-    &u8g2,
-    U8G2_R0,
-    u8x8_byte_hw_i2c,
-    u8x8_stm32_gpio_and_delay_cb
-  );
-  u8g2_InitDisplay(&u8g2); // send init sequence to the display, display is in sleep mode after this,
-  u8g2_SetPowerSave(&u8g2, 0); // wake up display
-  u8g2_ClearDisplay(&u8g2);
-  u8g2_UpdateDisplay(&u8g2);
-  u8g2_SetDrawColor(&u8g2, White);
-  u8g2_ClearBuffer(&u8g2);
-
-  // u8g2_ClearBuffer(&u8g2);
-  // mui_Draw(&mui);
-  // u8g2_SendBuffer(&u8g2);
-  // HAL_Delay(100);
-  // while(1);
-
-  while(1){
-  u8g2_SetDrawColor(&u8g2, Black);
-  u8g2_DrawBox(&u8g2, 0, 0, 128, 64);
-  u8g2_UpdateDisplay(&u8g2);
-  u8g2_SetDrawColor(&u8g2, White);
-  u8g2_DrawBox(&u8g2, 0, 0, 128, 64);
-  u8g2_UpdateDisplay(&u8g2);
+  
+  ui_init_display();
+  userio_init();
+  // u8g2_SetDrawColor(&u8g2, Black);
+  // u8g2_DrawBox(&u8g2, 0, 0, 128, 64);
+  // u8g2_UpdateDisplay(&u8g2);
+  // u8g2_SetDrawColor(&u8g2, White);
+  // u8g2_DrawBox(&u8g2, 0, 0, 128, 64);
+  // u8g2_UpdateDisplay(&u8g2);
     
-}
   
   /* USER CODE END 2 */
 

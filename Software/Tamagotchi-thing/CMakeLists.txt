@@ -29,19 +29,37 @@ file(GLOB_RECURSE U8G2_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/u8g2/*.c
 )
 
+file(GLOB_RECURSE LIBMCU_BUTTON_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/libmcu/libmcu/modules/button/src/*.c
+)
+
+file(GLOB_RECURSE LIBMCU_COMMON_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/libmcu/libmcu/modules/common/src/*.c
+)
+
+file(GLOB_RECURSE LIBMCU_LOGGING_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/libmcu/libmcu/modules/logging/src/*.c
+)
+
 # Add U8g2 sources to target
 target_sources(${CMAKE_PROJECT_NAME} PRIVATE
     ${U8G2_SOURCES}
-
-    # Your own display driver glue files
+    ${LIBMCU_BUTTON_SOURCES}
+    ${LIBMCU_COMMON_SOURCES}
+    ${LIBMCU_LOGGING_SOURCES}
+    
     Core/Src/ssd1306.c
-    Core/Src/ssd1306_fonts.c
     Core/Src/u8g2_stm32L0.c
+    Core/Src/ui.c
+    Core/Src/userio.c
 )
 
 # Add include path for U8g2 headers
 target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/u8g2
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/libmcu/libmcu/modules/button/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/libmcu/libmcu/modules/common/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/libmcu/libmcu/modules/logging/include
 )
 
 # --- U8g2 integration ends here ---

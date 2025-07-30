@@ -1,0 +1,3 @@
+[submodule "Software/Tamagotchi-thing/Core/Src/libmcu/libmcu"]
+	path = Software/Tamagotchi-thing/Core/Src/libmcu/libmcu
+	url = https://github.com/libmcu/libmcu.git
