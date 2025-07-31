@@ -55,15 +55,15 @@ ENTRY(Reset_Handler)
 /* Specify the memory areas */
 MEMORY
 {
-RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 20K
-FLASH (rx)      : ORIGIN = 0x8000000, LENGTH = 128K
+  RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 20K
+  FLASH (rx)     : ORIGIN = 0x08000000, LENGTH = 128K
 }
 
 /* Highest address of the user mode stack */
 _estack = ORIGIN(RAM) + LENGTH(RAM);    /* end of RAM */
 /* Generate a link error if heap and stack don't fit into RAM */
 _Min_Heap_Size = 0x200;      /* required amount of heap  */
-_Min_Stack_Size = 0x400; /* required amount of stack */
+_Min_Stack_Size = 0x400;     /* required amount of stack */
 
 /* Define output sections */
 SECTIONS
@@ -90,7 +90,7 @@ SECTIONS
     KEEP (*(.fini))
 
     . = ALIGN(4);
-    _etext = .;        /* define a global symbols at end of code */
+    _etext = .;        /* define a global symbol at end of code */
   } >FLASH
 
   /* Constant data goes into FLASH */
@@ -102,14 +102,24 @@ SECTIONS
     . = ALIGN(4);
   } >FLASH
 
-  .ARM.extab (READONLY) : /* The "READONLY" keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
+  /* Tamagotchi ROM section */
+  .rom :
+  {
+    __rom_start = .;
+    . = ALIGN(4);
+    KEEP(*(.rom))
+    . = ALIGN(4);
+    __rom_end = .;
+  } >FLASH
+
+  .ARM.extab (READONLY) :
   {
     . = ALIGN(4);
     *(.ARM.extab* .gnu.linkonce.armextab.*)
     . = ALIGN(4);
   } >FLASH
 
-  .ARM (READONLY) : /* The "READONLY" keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
+  .ARM (READONLY) :
   {
     . = ALIGN(4);
     __exidx_start = .;
@@ -118,7 +128,7 @@ SECTIONS
     . = ALIGN(4);
   } >FLASH
 
-  .preinit_array (READONLY) : /* The "READONLY" keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
+  .preinit_array (READONLY) :
   {
     . = ALIGN(4);
     PROVIDE_HIDDEN (__preinit_array_start = .);
@@ -127,7 +137,7 @@ SECTIONS
     . = ALIGN(4);
   } >FLASH
 
-  .init_array (READONLY) : /* The "READONLY" keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
+  .init_array (READONLY) :
   {
     . = ALIGN(4);
     PROVIDE_HIDDEN (__init_array_start = .);
@@ -137,7 +147,7 @@ SECTIONS
     . = ALIGN(4);
   } >FLASH
 
-  .fini_array (READONLY) : /* The "READONLY" keyword is only supported in GCC11 and later, remove it if using GCC10 or earlier. */
+  .fini_array (READONLY) :
   {
     . = ALIGN(4);
     PROVIDE_HIDDEN (__fini_array_start = .);
@@ -163,7 +173,7 @@ SECTIONS
     . = ALIGN(4);
   } >RAM AT> FLASH
 
- /* Initialized TLS data section */
+  /* Initialized TLS data section */
   .tdata : ALIGN(4)
   {
     *(.tdata .tdata.* .gnu.linkonce.td.*)
@@ -186,10 +196,11 @@ SECTIONS
   PROVIDE( __data_source = LOADADDR(.data) );
   PROVIDE( __data_source_end = __tdata_source_end );
   PROVIDE( __data_source_size = __data_source_end - __data_source );
+
   /* Uninitialized data section */
   .tbss (NOLOAD) : ALIGN(4)
   {
-     /* This is used by the startup in order to initialize the .bss secion */
+     /* This is used by the startup in order to initialize the .bss section */
     _sbss = .;         /* define a global symbol at bss start */
     __bss_start__ = _sbss;
     *(.tbss .tbss.*)
@@ -215,10 +226,10 @@ SECTIONS
     *(.bss*)
     *(COMMON)
 
-      . = ALIGN(4);
+    . = ALIGN(4);
     _ebss = .;         /* define a global symbol at bss end */
     __bss_end__ = _ebss;
-      PROVIDE( __bss_end = .);
+    PROVIDE( __bss_end = .);
   } >RAM
   PROVIDE( __non_tls_bss_start = ADDR(.bss) );
 
@@ -235,8 +246,6 @@ SECTIONS
     . = . + _Min_Stack_Size;
     . = ALIGN(8);
   } >RAM
-
-
 
   /* Remove information from the standard libraries */
   /DISCARD/ :

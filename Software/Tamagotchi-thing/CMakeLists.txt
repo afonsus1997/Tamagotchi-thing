@@ -42,6 +42,8 @@ set(PROJECT_SOURCES
     Core/Src/ui/ui.c
     Core/Src/usb/usb_user.c
     Core/Src/usb/usb_descriptors.c
+    Core/Src/flash/flash.c
+    Core/Src/flash/flash_glue.c
     Core/Src/ssd1306.c
     Core/Src/u8g2_stm32L0.c
 )
@@ -73,6 +75,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/userio
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/ui
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/usb
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/flash
     ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/tinyusb/src
     ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/tinyusb/src/class/cdc
     # ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/tinyusb/src/class/msc
