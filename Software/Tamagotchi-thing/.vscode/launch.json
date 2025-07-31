@@ -17,16 +17,6 @@
           "imageFileName": "${command:st-stm32-ide-debug-launch.get-projects-binary-from-context1}"
         }
       ]
-    },
-    {
-      "type": "cppdbg",
-      "request": "launch",
-      "name": "STM32 Run Without Debugging",
-      "preLaunchTask": "Flash without debug",
-      "program": "${workspaceFolder}/build/TamagotchiThing.elf", // dummy
-      "cwd": "${workspaceFolder}",
-      "stopAtEntry": false,
-      "noDebug": true
     }
   ]
 }

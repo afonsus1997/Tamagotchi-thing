@@ -20,12 +20,13 @@
 #include "main.h"
 #include "adc.h"
 #include "dma.h"
+#include "fatfs.h"
 #include "i2c.h"
 #include "rtc.h"
 #include "spi.h"
 #include "tim.h"
 #include "usart.h"
-#include "usb_device.h"
+#include "usb.h"
 #include "gpio.h"
 
 /* Private includes ----------------------------------------------------------*/
@@ -34,6 +35,7 @@
 #include "ssd1306_fonts.h"
 #include "ui.h"
 #include "userio.h"
+#include "usb_user.h" 
 
 /* USER CODE END Includes */
 
@@ -106,12 +108,14 @@ int main(void)
   MX_SPI1_Init();
   MX_TIM3_Init();
   MX_USART4_UART_Init();
-  MX_USB_DEVICE_Init();
+  MX_FATFS_Init();
+  // MX_USB_PCD_Init(); Tinyusb is managing this
   /* USER CODE BEGIN 2 */
   // Init OLED
   
   ui_init_display();
   userio_init();
+  usb_user_init();
   // u8g2_SetDrawColor(&u8g2, Black);
   // u8g2_DrawBox(&u8g2, 0, 0, 128, 64);
   // u8g2_UpdateDisplay(&u8g2);
@@ -127,7 +131,7 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-
+    usb_user_task();
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
