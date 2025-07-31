@@ -92,6 +92,7 @@ NVIC.SysTick_IRQn=true\:3\:0\:false\:false\:true\:false\:true\:false
 NVIC.TIM2_IRQn=true\:3\:0\:false\:false\:true\:false\:true\:true
 NVIC.TimeBase=TIM2_IRQn
 NVIC.TimeBaseIP=TIM2
+NVIC.USB_IRQn=true\:0\:0\:false\:false\:true\:true\:true\:true
 PA0.Locked=true
 PA0.Mode=Asynchronous
 PA0.Signal=USART4_TX

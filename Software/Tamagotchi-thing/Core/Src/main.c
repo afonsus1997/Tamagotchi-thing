@@ -24,6 +24,7 @@
 #include "i2c.h"
 #include "rtc.h"
 #include "spi.h"
+#include "stm32l0xx_hal.h"
 #include "tim.h"
 #include "usart.h"
 #include "usb.h"
@@ -109,7 +110,7 @@ int main(void)
   MX_TIM3_Init();
   MX_USART4_UART_Init();
   MX_FATFS_Init();
-  // MX_USB_PCD_Init(); Tinyusb is managing this
+  MX_USB_PCD_Init();
   /* USER CODE BEGIN 2 */
   // Init OLED
   
@@ -131,8 +132,10 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
-    usb_user_task();
+
     /* USER CODE BEGIN 3 */
+    usb_user_task();
+    
   }
   /* USER CODE END 3 */
 }

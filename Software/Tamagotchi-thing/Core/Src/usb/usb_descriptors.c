@@ -1,4 +1,5 @@
 #include "tusb.h"
+#include <string.h>
 
 // USB Device Descriptor
 tusb_desc_device_t const desc_device =
@@ -23,7 +24,6 @@ tusb_desc_device_t const desc_device =
     .bNumConfigurations = 1
 };
 
-// Invoked by TinyUSB
 uint8_t const* tud_descriptor_device_cb(void)
 {
     return (uint8_t const*)&desc_device;
@@ -62,19 +62,23 @@ uint16_t const* tud_descriptor_string_cb(uint8_t index, uint16_t langid)
 
     if (index == 0)
     {
+        // Supported language descriptor (0x0409 = English)
+        _desc_str[0] = (TUSB_DESC_STRING << 8) | (2 + 2);
         _desc_str[1] = 0x0409;
-        return (uint16_t const*) _desc_str;
+        return _desc_str;
     }
 
     if (index >= sizeof(string_desc_arr)/sizeof(string_desc_arr[0])) return NULL;
 
     const char* str = string_desc_arr[index];
     uint8_t len = strlen(str);
-
     if (len > 31) len = 31;
 
-    _desc_str[0] = (TUSB_DESC_STRING << 8 ) | (2*len + 2);
-    for (uint8_t i = 0; i < len; i++) _desc_str[1+i] = str[i];
+    _desc_str[0] = (TUSB_DESC_STRING << 8) | (2 * len + 2);
+    for (uint8_t i = 0; i < len; i++)
+    {
+        _desc_str[1 + i] = str[i];
+    }
 
     return _desc_str;
 }
