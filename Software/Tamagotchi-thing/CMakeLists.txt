@@ -37,6 +37,10 @@ file(GLOB_RECURSE LWBTN_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/lwbtn/lwbtn/src/lwbtn/*.c
 )
 
+file(GLOB_RECURSE TAMALIB_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/tamalib/*.c
+)
+
 # Your project source files
 set(PROJECT_SOURCES
     Core/Src/userio/userio.c
@@ -47,6 +51,7 @@ set(PROJECT_SOURCES
     Core/Src/usb/usb_user_cdc.c 
     Core/Src/flash/flash.c
     Core/Src/flash/flash_glue.c
+    Core/Src/tama_user/tama_user.c
     Core/Src/ssd1306.c
     Core/Src/log/log.c
     Core/Src/u8g2_stm32L0.c
@@ -68,6 +73,7 @@ target_sources(${PROJECT_NAME} PRIVATE
     ${PROJECT_SOURCES}
     ${TINYUSB_SOURCES}
     ${LWBTN_SOURCES}
+    ${TAMALIB_SOURCES}
 )
 
 # Include directories
@@ -85,7 +91,11 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     # ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/tinyusb/src/class/msc
     ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/tinyusb/src/portable/stm32/stm32l0
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/lwbtn/lwbtn/src/include/lwbtn
-    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/lwbtn/lwbtn/src/include/
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/lwbtn/lwbtn/src/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/tamalib
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/tama_user
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src
+    ${CMAKE_CURRENT_SOURCE_DIR}/Proprietary # For tama binary
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE

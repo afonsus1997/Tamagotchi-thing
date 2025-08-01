@@ -3,32 +3,37 @@
 #include <stdarg.h>
 #include <string.h>
 
-static log_level_t current_level = LOG_LEVEL_INFO;
+static log_level_t current_level = LOG_INFO;
 static void (*log_write_fn)(const char*, size_t) = NULL;
 static uint32_t (*timestamp_fn)(void) = NULL;
 
-static const char* level_str[] = {
-    "DEBUG", "INFO", "WARN", "ERROR"
-};
+static const char* get_level_str(log_level_t level) {
+    switch (level) {
+        case LOG_ERROR:  return "ERROR";
+        case LOG_INFO:   return "INFO";
+        case LOG_MEMORY: return "MEMORY";
+        case LOG_CPU:    return "CPU";
+        case LOG_INT:    return "DEBUG";
+        default:         return "UNKNOWN";
+    }
+}
 
-void log_init(void (*write_fn)(const char*, size_t))
-{
+void log_init(void (*write_fn)(const char*, size_t)) {
     log_write_fn = write_fn;
 }
 
-void log_set_level(log_level_t level)
-{
+void log_set_level(log_level_t level) {
     current_level = level;
 }
 
-void log_set_timestamp_fn(uint32_t (*ts_fn)(void))
-{
+void log_set_timestamp_fn(uint32_t (*ts_fn)(void)) {
     timestamp_fn = ts_fn;
 }
 
-void log_printf_level(log_level_t level, const char* fmt, ...)
-{
-    if (level < current_level || log_write_fn == NULL) return;
+void log_printf_level(log_level_t level, const char* fmt, ...) {
+    if ((current_level & level) == 0 || log_write_fn == NULL) {
+        return;
+    }
 
     char buf[256];
     int len = 0;
@@ -39,7 +44,7 @@ void log_printf_level(log_level_t level, const char* fmt, ...)
     }
 
     // Add log level string
-    len += snprintf(buf + len, sizeof(buf) - len, "[%s] ", level_str[level]);
+    len += snprintf(buf + len, sizeof(buf) - len, "[%s] ", get_level_str(level));
 
     // Format the actual log message
     va_list args;
@@ -56,13 +61,11 @@ void log_printf_level(log_level_t level, const char* fmt, ...)
     log_write_fn(buf, len);
 }
 
-
 static void log_write_printf(const char* str, size_t len) {
     printf("%.*s", (int)len, str);
 }
 
-void log_init_printf(uint8_t level)
-{
+void log_init_printf(uint8_t level) {
     log_init(log_write_printf);
     log_set_level(level);
     log_set_timestamp_fn(HAL_GetTick);

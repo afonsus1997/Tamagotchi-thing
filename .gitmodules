@@ -7,3 +7,6 @@
 [submodule "Software/Tamagotchi-thing/Core/Src/lwbtn"]
 	path = Software/Tamagotchi-thing/Core/Src/lwbtn
 	url = https://github.com/MaJerle/lwbtn
+[submodule "Software/Tamagotchi-thing/Core/Src/tamalib"]
+	path = Software/Tamagotchi-thing/Core/Src/tamalib
+	url = https://github.com/jcrona/tamalib.git

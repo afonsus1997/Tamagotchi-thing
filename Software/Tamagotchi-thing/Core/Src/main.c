@@ -36,6 +36,7 @@
 #include "userio.h"
 #include "usb_user.h" 
 #include "log.h"
+#include "hal.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -117,7 +118,7 @@ int main(void)
   userio_init();
   HAL_TIM_Base_Start_IT(&htim7);
   usb_user_init();
-  log_init_printf(LOG_LEVEL_DEBUG);
+  log_init_printf(LOG_INT);
   LOG_INFO("Initialization complete");
   
   // u8g2_SetDrawColor(&u8g2, Black);
