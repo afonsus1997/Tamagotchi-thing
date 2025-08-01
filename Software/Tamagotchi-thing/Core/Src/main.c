@@ -108,19 +108,23 @@ int main(void)
   MX_USART4_UART_Init();
   MX_FATFS_Init();
   MX_USB_PCD_Init();
+  MX_TIM6_Init();
+  MX_TIM7_Init();
   /* USER CODE BEGIN 2 */
   // Init OLED
   
   ui_init_display();
   userio_init();
-  // usb_user_init();
+  HAL_TIM_Base_Start_IT(&htim7);
+  usb_user_task();
+  usb_user_init();
   // u8g2_SetDrawColor(&u8g2, Black);
   // u8g2_DrawBox(&u8g2, 0, 0, 128, 64);
   // u8g2_UpdateDisplay(&u8g2);
   // u8g2_SetDrawColor(&u8g2, White);
   // u8g2_DrawBox(&u8g2, 0, 0, 128, 64);
   // u8g2_UpdateDisplay(&u8g2);
-
+  printf("printf test");
   
   /* USER CODE END 2 */
 
@@ -133,7 +137,7 @@ int main(void)
     /* USER CODE BEGIN 3 */
     ui_loop();
     userio_process();
-    // usb_user_task();
+    usb_user_task();
     
   }
   /* USER CODE END 3 */
@@ -153,14 +157,19 @@ void SystemClock_Config(void)
   */
   __HAL_PWR_VOLTAGESCALING_CONFIG(PWR_REGULATOR_VOLTAGE_SCALE1);
 
+  /** Configure LSE Drive Capability
+  */
+  HAL_PWR_EnableBkUpAccess();
+  __HAL_RCC_LSEDRIVE_CONFIG(RCC_LSEDRIVE_LOW);
+
   /** Initializes the RCC Oscillators according to the specified parameters
   * in the RCC_OscInitTypeDef structure.
   */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_LSI
+  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSI|RCC_OSCILLATORTYPE_LSE
                               |RCC_OSCILLATORTYPE_HSI48;
+  RCC_OscInitStruct.LSEState = RCC_LSE_ON;
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
-  RCC_OscInitStruct.LSIState = RCC_LSI_ON;
   RCC_OscInitStruct.HSI48State = RCC_HSI48_ON;
   RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
@@ -184,7 +193,7 @@ void SystemClock_Config(void)
   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_I2C3|RCC_PERIPHCLK_RTC
                               |RCC_PERIPHCLK_USB;
   PeriphClkInit.I2c3ClockSelection = RCC_I2C3CLKSOURCE_PCLK1;
-  PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSI;
+  PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
   PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_HSI48;
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
@@ -214,7 +223,10 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     HAL_IncTick();
   }
   /* USER CODE BEGIN Callback 1 */
-
+  if (htim->Instance == TIM7)
+  {
+      ui_force_redraw();  
+  }
   /* USER CODE END Callback 1 */
 }
 

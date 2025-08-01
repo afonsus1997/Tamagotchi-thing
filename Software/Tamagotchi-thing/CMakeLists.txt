@@ -44,6 +44,7 @@ set(PROJECT_SOURCES
     Core/Src/ui/forms.c
     Core/Src/usb/usb_user.c
     Core/Src/usb/usb_descriptors.c
+    Core/Src/usb/usb_user_cdc.c 
     Core/Src/flash/flash.c
     Core/Src/flash/flash_glue.c
     Core/Src/ssd1306.c

@@ -7,6 +7,8 @@
 u8g2_t u8g2;
 mui_t mui;
 
+uint8_t is_redraw = 1;
+
 // Define menu field types
 muif_t muif_list[] MUI_PROGMEM = {
   MUIF_U8G2_FONT_STYLE(0, u8g2_font_helvR08_tr),
@@ -24,9 +26,9 @@ fds_t fds_data[] = {
   MUI_STYLE(1)
   MUI_DATA("GP", 
     MUI_10 "Return to game|"
-    // MUI_20 "ROM Mgmt|"
-    // MUI_30 "Save Mgmt|"
-    // MUI_40 "SW Update|"
+    MUI_20 "ROM Mgmt|"
+    MUI_30 "Save Mgmt|"
+    MUI_40 "SW Update|"
     MUI_50 "Stats|"
     MUI_60 "About|")
   MUI_XYA("GC", 0, 28, 0)
@@ -37,7 +39,9 @@ fds_t fds_data[] = {
   MUI_XY("AB", 0, 0)  // Dummy field to trigger the draw + input handler
 };
 
-
+void ui_force_redraw(){
+  is_redraw = 1;
+}
 
 // Initialize display and UI
 void ui_init_display() {
@@ -55,7 +59,6 @@ void ui_init_display() {
     mui_GotoForm(&mui, 1, 0);
 }
 
-uint8_t is_redraw = 1;
 
 // Call repeatedly in your main loop
 void ui_loop() {
