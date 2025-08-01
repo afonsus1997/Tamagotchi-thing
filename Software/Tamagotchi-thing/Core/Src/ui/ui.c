@@ -8,8 +8,9 @@ static mui_t mui;
 // Define menu field types
 muif_t muif_list[] MUI_PROGMEM = {
     MUIF_RO("GP",mui_u8g2_goto_data),
-    MUIF_BUTTON("GC", my_goto_form_custom),
-    MUIF_BUTTON("GC", my_goto_form_custom)
+    MUIF_BUTTON("GC", forms_main_menu),
+    MUIF_BUTTON("GC", forms_main_menu),
+    MUIF_RO("AB", forms_about_screen)
 };
 
 // Define form 1 with 3 menu options
@@ -26,6 +27,9 @@ fds_t fds_data[] = {
   MUI_XYA("GC", 0, 28, 0)
   MUI_XYA("GC", 0, 44, 1)
   MUI_XYA("GC", 0, 60, 2)
+  MUI_FORM(99)
+  MUI_STYLE(0)
+  MUI_XY("AB", 0, 0)  // Dummy field to trigger the draw + input handler
 };
 
 

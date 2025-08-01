@@ -1,7 +1,8 @@
 #include "forms.h"
+#include "mui.h"
 
 
-uint8_t my_goto_form_custom(mui_t *ui, uint8_t msg) {
+uint8_t forms_main_menu(mui_t *ui, uint8_t msg) {
     u8g2_t *u8g2 = mui_get_U8g2(ui);
     uint8_t arg = ui->arg;
 
@@ -37,4 +38,27 @@ uint8_t my_goto_form_custom(mui_t *ui, uint8_t msg) {
     }
 
     return 0;
+}
+
+
+uint8_t forms_about_screen(mui_t *ui, uint8_t msg)
+{
+  u8g2_t *u8g2 = mui_get_U8g2(ui);
+  switch(msg)
+  {
+    case MUIF_MSG_DRAW:
+      u8g2_ClearBuffer(u8g2);
+      u8g2_SetFontMode(u8g2, 1);
+      u8g2_SetBitmapMode(u8g2, 1);
+      u8g2_SetFont(u8g2, u8g2_font_t0_12_tr);
+      u8g2_DrawStr(u8g2, 16, 13, "Tamagotchi-Thing");
+      u8g2_DrawFrame(u8g2, 13, 2, 102, 15);
+      u8g2_DrawStr(u8g2, 13, 33, "By Afonso Muralha");
+      u8g2_DrawStr(u8g2, 12, 44, "afonsomuralha.com");
+      u8g2_DrawStr(u8g2, 13, 60, "Based on OpenTama");
+      u8g2_SendBuffer(u8g2);
+      break;
+    case MUIF_MSG_CURSOR_ENTER:
+      return mui_GotoFormAutoCursorPosition(ui, ui->last_form_id[ui->last_form_stack_pos]);  }
+  return 0;
 }
