@@ -35,7 +35,7 @@
 #include "ui.h"
 #include "userio.h"
 #include "usb_user.h" 
-
+#include "log.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -116,15 +116,16 @@ int main(void)
   ui_init_display();
   userio_init();
   HAL_TIM_Base_Start_IT(&htim7);
-  usb_user_task();
   usb_user_init();
+  log_init_printf(LOG_LEVEL_DEBUG);
+  LOG_INFO("Initialization complete");
+  
   // u8g2_SetDrawColor(&u8g2, Black);
   // u8g2_DrawBox(&u8g2, 0, 0, 128, 64);
   // u8g2_UpdateDisplay(&u8g2);
   // u8g2_SetDrawColor(&u8g2, White);
   // u8g2_DrawBox(&u8g2, 0, 0, 128, 64);
   // u8g2_UpdateDisplay(&u8g2);
-  printf("printf test");
   
   /* USER CODE END 2 */
 
@@ -138,6 +139,7 @@ int main(void)
     ui_loop();
     userio_process();
     usb_user_task();
+    
     
   }
   /* USER CODE END 3 */

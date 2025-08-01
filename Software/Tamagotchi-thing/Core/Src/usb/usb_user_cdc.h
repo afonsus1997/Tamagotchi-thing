@@ -8,4 +8,6 @@
 #include <stdarg.h>
 #include <stdio.h>
 
+#include "log.h"
+
 #endif  //!__USB_USER_CDC__H__

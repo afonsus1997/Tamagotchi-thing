@@ -28,3 +28,11 @@ int _write(int fd, const void* buf, size_t count)
     }
     return 0; // or -1 for error
 }
+
+void cdc_log_write(const char* data, size_t len)
+{
+    if (tud_cdc_connected()) {
+        tud_cdc_write(data, len);
+        tud_cdc_write_flush();
+    }
+}
