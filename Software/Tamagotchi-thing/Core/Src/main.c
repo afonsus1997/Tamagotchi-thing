@@ -19,12 +19,10 @@
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "adc.h"
-#include "dma.h"
 #include "fatfs.h"
 #include "i2c.h"
 #include "rtc.h"
 #include "spi.h"
-#include "stm32l0xx_hal.h"
 #include "tim.h"
 #include "usart.h"
 #include "usb.h"
@@ -101,7 +99,6 @@ int main(void)
 
   /* Initialize all configured peripherals */
   MX_GPIO_Init();
-  MX_DMA_Init();
   MX_ADC_Init();
   MX_RTC_Init();
   MX_I2C2_Init();
@@ -123,7 +120,8 @@ int main(void)
   // u8g2_SetDrawColor(&u8g2, White);
   // u8g2_DrawBox(&u8g2, 0, 0, 128, 64);
   // u8g2_UpdateDisplay(&u8g2);
-    
+  ui_loop();
+
   
   /* USER CODE END 2 */
 

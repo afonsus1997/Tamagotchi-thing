@@ -1,49 +1,62 @@
 #include "ui.h"
-#include "u8g2.h"
 
 
+// Global display and UI objects
 static u8g2_t u8g2;
-// Create MUI object
-static mui_t ui;
+static mui_t mui;
 
-
-muif_t muif_list[] = {  
-  MUIF_VARIABLE("BN", NULL, mui_u8g2_btn_exit_wm_fi)
+// Define menu field types
+muif_t muif_list[] MUI_PROGMEM = {
+    MUIF_RO("GP",mui_u8g2_goto_data),
+    MUIF_BUTTON("GC", my_goto_form_custom),
+    MUIF_BUTTON("GC", my_goto_form_custom)
 };
 
-fds_t fds_data[] = 
-MUI_FORM(1)
-MUI_XYT("BN", 64, 16, " Select Me ");
+// Define form 1 with 3 menu options
+fds_t fds_data[] = {
+  MUI_FORM(1)
+  MUI_STYLE(0)
+  MUI_DATA("GP", 
+    MUI_10 "Return to game|"
+    MUI_20 "ROM Mgmt|"
+    MUI_30 "Save Mgmt|"
+    MUI_40 "SW Update|"
+    MUI_50 "Stats|"
+    MUI_60 "About|")
+  MUI_XYA("GC", 0, 28, 0)
+  MUI_XYA("GC", 0, 44, 1)
+  MUI_XYA("GC", 0, 60, 2)
+};
 
 
-void ui_init_display(){
-  HAL_GPIO_WritePin(OLED_RST_GPIO_Port, OLED_RST_Pin, GPIO_PIN_RESET);
-  HAL_Delay(10);
-  HAL_GPIO_WritePin(OLED_RST_GPIO_Port, OLED_RST_Pin, GPIO_PIN_SET);
-  // ssd1306_Init();
-  // ssd1306_SetCursor(2, 1);
-  // ssd1306_WriteString("Test", Font_7x10, White);
-  // ssd1306_UpdateScreen();
 
-  u8g2_Setup_sh1106_i2c_128x64_noname_f(
-    &u8g2,
-    U8G2_R0,
-    u8x8_byte_hw_i2c,
-    u8x8_stm32_gpio_and_delay_cb
-  );
-  u8g2_InitDisplay(&u8g2); // send init sequence to the display, display is in sleep mode after this,
-  u8g2_SetPowerSave(&u8g2, 0); // wake up display
-  u8g2_ClearDisplay(&u8g2);
-  u8g2_UpdateDisplay(&u8g2);
-  u8g2_SetDrawColor(&u8g2, 1);
-  u8g2_ClearBuffer(&u8g2);
-  u8g2_SetFont(&u8g2, u8g2_font_helvR08_tr);
-  mui_Init(&ui, &u8g2, &fds_data, &muif_list, sizeof(muif_list)/sizeof(muif_t));
-  mui_GotoForm(&ui,/* form_id= */ 1, /* initial_cursor_position= */ 0);
-  u8g2_ClearBuffer(&u8g2);
-  // mui_Draw(&ui);
-  // u8g2_UpdateDisplay(&u8g2);
-  u8g2_DrawBox(&u8g2, 0, 0, 128, 10);
-  u8g2_DrawBox(&u8g2, 0, 10, 127, 10);
-  u8g2_SendBuffer(&u8g2);
+// Initialize display and UI
+void ui_init_display() {
+    HAL_GPIO_WritePin(OLED_RST_GPIO_Port, OLED_RST_Pin, GPIO_PIN_RESET);
+    HAL_Delay(10);
+    HAL_GPIO_WritePin(OLED_RST_GPIO_Port, OLED_RST_Pin, GPIO_PIN_SET);
+
+    u8g2_Setup_sh1106_i2c_128x64_noname_f(
+        &u8g2, U8G2_R2, u8x8_byte_hw_i2c, u8x8_stm32_gpio_and_delay_cb
+    );
+    u8g2_InitDisplay(&u8g2);
+    u8g2_SetPowerSave(&u8g2, 0);
+
+    mui_Init(&mui, &u8g2, fds_data, muif_list, sizeof(muif_list)/sizeof(muif_t));
+    mui_GotoForm(&mui, 1, 1);
+}
+
+// Call repeatedly in your main loop
+void ui_loop() {
+    u8g2_ClearBuffer(&u8g2);
+
+    // Draw title and line at top
+    u8g2_SetFont(&u8g2, u8g2_font_t0_15b_tr);
+    u8g2_DrawStr(&u8g2, 3, 13, "Main Menu");
+    u8g2_DrawLine(&u8g2, 0, 15, 127, 15);
+
+    // Draw the current form with cursor and menu entries
+    mui_Draw(&mui);
+
+    u8g2_SendBuffer(&u8g2);
 }

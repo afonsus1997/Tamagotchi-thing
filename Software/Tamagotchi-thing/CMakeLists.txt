@@ -40,6 +40,7 @@ file(GLOB_RECURSE LIBMCU_LOGGING_SOURCES
 set(PROJECT_SOURCES
     Core/Src/userio/userio.c
     Core/Src/ui/ui.c
+    Core/Src/ui/forms.c
     Core/Src/usb/usb_user.c
     Core/Src/usb/usb_descriptors.c
     Core/Src/flash/flash.c
