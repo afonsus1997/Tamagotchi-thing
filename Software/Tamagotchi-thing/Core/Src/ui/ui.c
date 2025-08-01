@@ -1,27 +1,32 @@
 #include "ui.h"
+#include "mui.h"
+#include "u8g2.h"
 
 
 // Global display and UI objects
-static u8g2_t u8g2;
-static mui_t mui;
+u8g2_t u8g2;
+mui_t mui;
 
 // Define menu field types
 muif_t muif_list[] MUI_PROGMEM = {
-    MUIF_RO("GP",mui_u8g2_goto_data),
-    MUIF_BUTTON("GC", forms_main_menu),
-    MUIF_BUTTON("GC", forms_main_menu),
-    MUIF_RO("AB", forms_about_screen)
+  MUIF_U8G2_FONT_STYLE(0, u8g2_font_helvR08_tr),
+  MUIF_U8G2_FONT_STYLE(1, u8g2_font_t0_14_tr),
+  MUIF_RO("GP",mui_u8g2_goto_data),
+  MUIF_BUTTON("GC", mui_u8g2_goto_form_w1_pi),
+  MUIF_BUTTON("GC", mui_u8g2_goto_form_w1_pf),
+  MUIF_RO("AB", forms_about_screen)
 };
+
 
 // Define form 1 with 3 menu options
 fds_t fds_data[] = {
   MUI_FORM(1)
-  MUI_STYLE(0)
+  MUI_STYLE(1)
   MUI_DATA("GP", 
     MUI_10 "Return to game|"
-    MUI_20 "ROM Mgmt|"
-    MUI_30 "Save Mgmt|"
-    MUI_40 "SW Update|"
+    // MUI_20 "ROM Mgmt|"
+    // MUI_30 "Save Mgmt|"
+    // MUI_40 "SW Update|"
     MUI_50 "Stats|"
     MUI_60 "About|")
   MUI_XYA("GC", 0, 28, 0)
@@ -47,20 +52,59 @@ void ui_init_display() {
     u8g2_SetPowerSave(&u8g2, 0);
 
     mui_Init(&mui, &u8g2, fds_data, muif_list, sizeof(muif_list)/sizeof(muif_t));
-    mui_GotoForm(&mui, 1, 1);
+    mui_GotoForm(&mui, 1, 0);
 }
+
+uint8_t is_redraw = 1;
 
 // Call repeatedly in your main loop
 void ui_loop() {
-    u8g2_ClearBuffer(&u8g2);
-
+    // u8g2_ClearBuffer(&u8g2);
     // Draw title and line at top
-    u8g2_SetFont(&u8g2, u8g2_font_t0_15b_tr);
-    u8g2_DrawStr(&u8g2, 3, 13, "Main Menu");
-    u8g2_DrawLine(&u8g2, 0, 15, 127, 15);
+    // u8g2_SetFont(&u8g2, u8g2_font_t0_15b_tr);
+    // u8g2_DrawStr(&u8g2, 3, 13, "Main Menu");
+    // u8g2_DrawLine(&u8g2, 0, 15, 127, 15);
 
     // Draw the current form with cursor and menu entries
-    mui_Draw(&mui);
+    // mui_Draw(&mui);
 
-    u8g2_SendBuffer(&u8g2);
+    // u8g2_SendBuffer(&u8g2);
+
+  u8g2_SetFont(&u8g2, u8g2_font_helvR08_tr);
+  if ( mui_IsFormActive(&mui) )
+  {
+    /* menu is active: draw the menu */
+    if ( is_redraw ) {                  // is any redraw of the menu required?
+      u8g2_FirstPage(&u8g2);
+      do {
+        draw_main_menu_title(5);
+        mui_Draw(&mui);
+
+      } while( u8g2_NextPage(&u8g2) );
+      is_redraw = 0;                    // menu is now up to date, no redraw required at the moment
+    }
+  }
+}
+
+
+void ui_process_button_event(int btn_id) {
+    switch (btn_id) {
+        case BUTTON_LEFT:
+            // Move cursor up
+            is_redraw = 1;
+            mui_NextField(&mui);
+            break;
+        case BUTTON_RIGHT:
+            // Move cursor down
+            is_redraw = 1;
+            mui_PrevField(&mui);
+            break;
+        case BUTTON_CENTER:
+            // Activate selected field
+            is_redraw = 1;
+            mui_SendSelect(&mui);
+            break;
+        default:
+            break;
+    }
 }

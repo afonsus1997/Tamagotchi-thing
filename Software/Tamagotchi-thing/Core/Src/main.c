@@ -113,14 +113,13 @@ int main(void)
   
   ui_init_display();
   userio_init();
-  usb_user_init();
+  // usb_user_init();
   // u8g2_SetDrawColor(&u8g2, Black);
   // u8g2_DrawBox(&u8g2, 0, 0, 128, 64);
   // u8g2_UpdateDisplay(&u8g2);
   // u8g2_SetDrawColor(&u8g2, White);
   // u8g2_DrawBox(&u8g2, 0, 0, 128, 64);
   // u8g2_UpdateDisplay(&u8g2);
-  ui_loop();
 
   
   /* USER CODE END 2 */
@@ -132,7 +131,9 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    usb_user_task();
+    ui_loop();
+    userio_process();
+    // usb_user_task();
     
   }
   /* USER CODE END 3 */

@@ -26,14 +26,15 @@ file(GLOB_RECURSE U8G2_SOURCES
 )
 
 # Gather libmcu modules sources
-file(GLOB_RECURSE LIBMCU_BUTTON_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/libmcu/libmcu/modules/button/src/*.c
-)
 file(GLOB_RECURSE LIBMCU_COMMON_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/libmcu/libmcu/modules/common/src/*.c
 )
 file(GLOB_RECURSE LIBMCU_LOGGING_SOURCES
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/libmcu/libmcu/modules/logging/src/*.c
+)
+
+file(GLOB_RECURSE LWBTN_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/lwbtn/lwbtn/src/lwbtn/*.c
 )
 
 # Your project source files
@@ -60,17 +61,16 @@ file(GLOB_RECURSE TINYUSB_SOURCES
 # Add all sources to target
 target_sources(${PROJECT_NAME} PRIVATE
     ${U8G2_SOURCES}
-    ${LIBMCU_BUTTON_SOURCES}
     ${LIBMCU_COMMON_SOURCES}
     ${LIBMCU_LOGGING_SOURCES}
     ${PROJECT_SOURCES}
     ${TINYUSB_SOURCES}
+    ${LWBTN_SOURCES}
 )
 
 # Include directories
 target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/u8g2
-    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/libmcu/libmcu/modules/button/include
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/libmcu/libmcu/modules/common/include
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/libmcu/libmcu/modules/logging/include
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/userio
@@ -81,6 +81,8 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/tinyusb/src/class/cdc
     # ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/tinyusb/src/class/msc
     ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/tinyusb/src/portable/stm32/stm32l0
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/lwbtn/lwbtn/src/include/lwbtn
+    ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/lwbtn/lwbtn/src/include/
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
@@ -89,6 +91,7 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
     CFG_TUD_CDC=1
     CFG_TUD_MSC=0
     CFG_TUD_VENDOR=0
+    LWBTN_IGNORE_USER_OPTS=1
 )
 
 

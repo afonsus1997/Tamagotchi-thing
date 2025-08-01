@@ -2,11 +2,21 @@
 #define USERIO_H
 
 #include "main.h"
-#include "libmcu/button.h"
-#include "libmcu/compiler.h"
-#include "libmcu/button_overrides.h"
+#include "lwbtn.h"
+#include "ui.h"
 
+enum btnsIdx_e
+{
+  BUTTON_RIGHT = 0,
+  BUTTON_CENTER,
+  BUTTON_LEFT,
+  BUTTONS_TOTAL
+}; 
 
+void userio_process();
 void userio_init();
+
+extern const int buttons_id[BUTTONS_TOTAL];
+
 
 #endif // USERIO_H

@@ -4,3 +4,6 @@
 [submodule "Software/Tamagotchi-thing/Middlewares/Third_Party/tinyusb"]
 	path = Software/Tamagotchi-thing/Middlewares/Third_Party/tinyusb
 	url = https://github.com/hathach/tinyusb.git
+[submodule "Software/Tamagotchi-thing/Core/Src/lwbtn"]
+	path = Software/Tamagotchi-thing/Core/Src/lwbtn
+	url = https://github.com/MaJerle/lwbtn
