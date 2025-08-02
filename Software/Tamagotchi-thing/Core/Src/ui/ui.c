@@ -16,7 +16,7 @@ muif_t muif_list[] MUI_PROGMEM = {
   MUIF_RO("GP",mui_u8g2_goto_data),
   MUIF_BUTTON("GC", mui_u8g2_goto_form_w1_pi),
   MUIF_BUTTON("GC", mui_u8g2_goto_form_w1_pf),
-  MUIF_RO("AB", forms_about_screen)
+  MUIF_BUTTON("AB", forms_about_screen)
 };
 
 
@@ -25,15 +25,18 @@ fds_t fds_data[] = {
   MUI_FORM(1)
   MUI_STYLE(1)
   MUI_DATA("GP", 
-    MUI_10 "Return to game|"
-    MUI_20 "ROM Mgmt|"
-    MUI_30 "Save Mgmt|"
-    MUI_40 "SW Update|"
-    MUI_50 "Stats|"
-    MUI_60 "About|")
+    MUI_2 "Return to game|"
+    MUI_2 "ROM Mgmt|"
+    MUI_2 "Save Mgmt|"
+    MUI_2 "SW Update|"
+    MUI_2 "Stats|"
+    MUI_2 "About|")
   MUI_XYA("GC", 0, 28, 0)
   MUI_XYA("GC", 0, 44, 1)
   MUI_XYA("GC", 0, 60, 2)
+  MUI_FORM(2)
+  MUI_STYLE(0)
+  MUI_XY("AB", 0, 0)  // Dummy field to trigger the draw + input handler
   MUI_FORM(99)
   MUI_STYLE(0)
   MUI_XY("AB", 0, 0)  // Dummy field to trigger the draw + input handler

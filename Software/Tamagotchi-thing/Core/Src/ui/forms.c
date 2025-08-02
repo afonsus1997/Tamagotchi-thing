@@ -1,4 +1,5 @@
 #include "forms.h"
+#include "ui.h"
 
 void drawBatteryLevel(uint8_t x, uint8_t y, uint8_t percent) {
     if (percent > 100) {
@@ -65,7 +66,9 @@ uint8_t forms_about_screen(mui_t *ui, uint8_t msg)
       u8g2_DrawStr(u8g2, 13, 60, "Based on OpenTama");
       u8g2_SendBuffer(u8g2);
       break;
-    case MUIF_MSG_CURSOR_ENTER:
-      return mui_GotoFormAutoCursorPosition(ui, ui->last_form_id[ui->last_form_stack_pos]);  }
+    case MUIF_MSG_CURSOR_SELECT:
+      ui_force_redraw();  
+      return mui_GotoFormAutoCursorPosition(ui, 1); 
+  }
   return 0;
 }
