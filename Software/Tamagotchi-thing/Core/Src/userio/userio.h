@@ -4,6 +4,7 @@
 #include "main.h"
 #include "lwbtn.h"
 #include "ui.h"
+#include "lwbtn_opts.h"
 
 enum btnsIdx_e
 {

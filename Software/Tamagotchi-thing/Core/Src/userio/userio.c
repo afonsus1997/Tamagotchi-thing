@@ -17,7 +17,7 @@ static lwbtn_btn_t btns[] = {
 };
 
 void userio_button_event(struct lwbtn* lw, struct lwbtn_btn* btn, lwbtn_evt_t evt) {
-    if (evt == LWBTN_EVT_ONCLICK) {
+    if (evt == LWBTN_EVT_ONPRESS) {
         int btn_id = *(int*)btn->arg;
         ui_process_button_event(btn_id);
     }
