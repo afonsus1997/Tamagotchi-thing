@@ -3,7 +3,7 @@
   ******************************************************************************
   * @file    tim.c
   * @brief   This file provides code for the configuration
-  *          of the TIM instances.
+  *          of the TIM instances and time functions using TIM6.
   ******************************************************************************
   * @attention
   *
@@ -21,6 +21,14 @@
 #include "tim.h"
 
 /* USER CODE BEGIN 0 */
+
+typedef uint32_t mcu_time_t;
+
+volatile uint16_t ticks_h = 0;  // high 16-bit counter to extend TIM6 to 32-bit
+extern TIM_HandleTypeDef htim6;
+
+void system_disable_irq(void);
+void system_enable_irq(void);
 
 /* USER CODE END 0 */
 
@@ -98,9 +106,9 @@ void MX_TIM6_Init(void)
 
   /* USER CODE END TIM6_Init 1 */
   htim6.Instance = TIM6;
-  htim6.Init.Prescaler = 0;
+  htim6.Init.Prescaler = 15999;   // example: assuming 16MHz clock, prescale to 1kHz tick (1ms tick)
   htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
-  htim6.Init.Period = 65535;
+  htim6.Init.Period = 0xFFFF;
   htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
   if (HAL_TIM_Base_Init(&htim6) != HAL_OK)
   {
@@ -177,6 +185,10 @@ void HAL_TIM_Base_MspInit(TIM_HandleTypeDef* tim_baseHandle)
   /* USER CODE END TIM6_MspInit 0 */
     /* TIM6 clock enable */
     __HAL_RCC_TIM6_CLK_ENABLE();
+
+    /* TIM6 interrupt Init */
+    HAL_NVIC_SetPriority(TIM6_DAC_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(TIM6_DAC_IRQn);
   /* USER CODE BEGIN TIM6_MspInit 1 */
 
   /* USER CODE END TIM6_MspInit 1 */
@@ -260,6 +272,9 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
   /* USER CODE END TIM6_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_TIM6_CLK_DISABLE();
+
+    /* TIM6 interrupt Deinit */
+    HAL_NVIC_DisableIRQ(TIM6_DAC_IRQn);
   /* USER CODE BEGIN TIM6_MspDeInit 1 */
 
   /* USER CODE END TIM6_MspDeInit 1 */
@@ -281,5 +296,66 @@ void HAL_TIM_Base_MspDeInit(TIM_HandleTypeDef* tim_baseHandle)
 }
 
 /* USER CODE BEGIN 1 */
+
+
+
+void time_delay(mcu_time_t time)
+{
+    time_wait_until(time_get() + time);
+}
+
+
+
+/**
+ * @brief Get the current extended time (32-bit) combining TIM6 counter and overflow count.
+ * @retval mcu_time_t Current time in timer ticks (depends on TIM6 frequency)
+ */
+mcu_time_t time_get(void)
+{
+    mcu_time_t t;
+    uint32_t cnt;
+
+    system_disable_irq();
+
+    t = ticks_h;
+
+    // Check if an update (overflow) event is pending but interrupt not yet processed
+    if (__HAL_TIM_GET_FLAG(&htim6, TIM_FLAG_UPDATE) != RESET) {
+        t++;
+    }
+
+    cnt = __HAL_TIM_GET_COUNTER(&htim6);
+
+    system_enable_irq();
+
+    return (cnt | (t << 16));
+}
+
+/**
+ * @brief Wait until the specified time is reached.
+ * @param time Target time to wait until.
+ */
+void time_wait_until(mcu_time_t time)
+{
+    while ((int32_t)(time - time_get()) > 0) {
+        __asm__ __volatile__ ("nop");
+    }
+}
+
+
+// TIM6 IRQ Handler
+void TIM6_DAC_IRQHandler_user(void)
+{
+    if (__HAL_TIM_GET_FLAG(&htim6, TIM_FLAG_UPDATE) != RESET)
+    {
+        if (__HAL_TIM_GET_IT_SOURCE(&htim6, TIM_IT_UPDATE) != RESET)
+        {
+            __HAL_TIM_CLEAR_IT(&htim6, TIM_IT_UPDATE);
+            ticks_h++;
+        }
+    }
+}
+
+
 
 /* USER CODE END 1 */

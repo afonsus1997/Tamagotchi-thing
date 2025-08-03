@@ -16,7 +16,8 @@
 #include "tamalib.h"
 #include "rtc.h"
 #include "ui.h"
-
+#include "tim.h"
+#include "tama_storage.h"
 
 #define TAMA_DISPLAY_FRAMERATE  3   // 3 is optimal for Arduino UNO
 #define ENABLE_TAMA_SOUND
@@ -33,6 +34,8 @@
 #define ICON_OFFSET_Y					0
 #define LCD_OFFET_X					16
 #define LCD_OFFET_Y					8
+
+#define TAMALIB_FREQ					32768 // Hz
 
 //#define ENABLE_DUMP_STATE_TO_SERIAL_WHEN_START
 //#define ENABLE_SERIAL_DEBUG_INPUT
@@ -57,6 +60,8 @@ void hal_set_frequency(u32_t freq);
 void hal_play_frequency(bool_t en);
 
 int hal_handler(void);
+
+void tama_user_init();
 
 void tama_draw_tamalib_screen(void);
 

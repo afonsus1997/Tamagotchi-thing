@@ -1,13 +1,25 @@
 #include "tama_user.h"
-#include "log.h"
-#include "u8g2.h"
+
 
 uint16_t current_freq = 0; 
 uint8_t runOnceBool = 0;
 unsigned long lastSaveTimestamp = 0;
+uint16_t time_shift = 0;
 
 bool_t matrix_buffer[LCD_HEIGHT][LCD_WIDTH] = {{0}};
 bool_t icon_buffer[ICON_NUM] = {0};
+
+void tama_user_calculate_time_shift(){
+	while (((MCU_TIME_FREQ_X1000 << time_shift) < TAMALIB_FREQ * 1000) || (MCU_TIME_FREQ_X1000 << time_shift) % 1000) {
+		time_shift++;
+	}
+}
+
+void tama_user_init(){
+if (tamalib_init((const u12_t *) g_program, NULL, (MCU_TIME_FREQ_X1000 << time_shift)/1000)) {
+		LOG_ERROR("Tamalib initialization error!");
+	}
+}
 
 
 hal_t hal = {
@@ -58,14 +70,19 @@ void hal_log(log_level_t level, char *buff, ...)
 
 timestamp_t hal_get_timestamp(void)
 {
-	return (timestamp_t) RTC_GetTick();
+    return (timestamp_t)(time_get() << time_shift);
 }
+
+extern volatile int tamalib_is_late;  // make sure this is declared somewhere
 
 void hal_sleep_until(timestamp_t ts)
 {
-	// if ((int32_t) (ts - hal_get_timestamp()) > 0) {
-		// tamalib_is_late = 0;
-	// }
+    while ((int32_t)(ts - hal_get_timestamp()) > 0) {
+        // Optionally, add a small delay to prevent full CPU spin
+        time_delay(US_TO_MCU_TIME(50));  // delay ~50 microseconds
+    }
+
+    tamalib_is_late = 0;
 }
 
 void hal_update_screen(void)

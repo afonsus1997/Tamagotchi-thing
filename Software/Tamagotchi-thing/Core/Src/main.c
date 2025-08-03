@@ -37,6 +37,8 @@
 #include "usb_user.h" 
 #include "log.h"
 #include "hal.h"
+#include "tamalib.h"
+#include "tama_user.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -119,6 +121,7 @@ int main(void)
   HAL_TIM_Base_Start_IT(&htim7);
   usb_user_init();
   log_init_printf(LOG_INT);
+  tama_user_init();
   LOG_INFO("Initialization complete");
   
   // u8g2_SetDrawColor(&u8g2, Black);
@@ -137,9 +140,12 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    ui_loop();
+    // ui_loop();
     userio_process();
-    usb_user_task();
+    tamalib_step();
+
+    // usb_user_task();
+    
     
     
   }

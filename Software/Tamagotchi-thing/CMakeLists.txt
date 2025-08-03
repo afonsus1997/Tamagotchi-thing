@@ -43,6 +43,7 @@ file(GLOB_RECURSE TAMALIB_SOURCES
 
 # Your project source files
 set(PROJECT_SOURCES
+    ${CMAKE_CURRENT_SOURCE_DIR}/Proprietary/rom_12bit.c # For tama binary
     Core/Src/userio/userio.c
     Core/Src/ui/ui.c
     Core/Src/ui/forms.c
