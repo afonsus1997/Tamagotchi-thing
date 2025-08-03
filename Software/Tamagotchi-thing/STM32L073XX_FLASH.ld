@@ -1,22 +1,39 @@
+/*
+******************************************************************************
+**
+**  File        : LinkerScript.ld
+**  Target      : STM32L073RBTx (128 KB FLASH, 20 KB RAM)
+**  Features    :
+**      - 120 KB for program (FLASH)
+**      - 8 KB reserved for FATFS and one ROM file (STORE)
+**      - Proper _end definition for sysmem.c (_sbrk)
+**
+******************************************************************************
+*/
+
 /* Entry Point */
 ENTRY(Reset_Handler)
 
-/* Specify the memory areas */
+/* Memory regions */
 MEMORY
 {
-  RAM (xrw)      : ORIGIN = 0x20000000, LENGTH = 20K
-  FLASH (rx)     : ORIGIN = 0x08000000, LENGTH = 112K
-  ROMSTORE (rx)  : ORIGIN = 0x0801C000, LENGTH = 16K
+    FLASH (rx)  : ORIGIN = 0x08000000, LENGTH = 112K
+    STORE (rw)  : ORIGIN = 0x0801C000, LENGTH = 16K
+    RAM (xrw)   : ORIGIN = 0x20000000, LENGTH = 20K
 }
 
-/* Highest address of the user mode stack */
+
+/* Stack */
 _estack = ORIGIN(RAM) + LENGTH(RAM);
+
+/* Heap/Stack minimum sizes */
 _Min_Heap_Size = 0x200;
 _Min_Stack_Size = 0x400;
 
+/* Sections */
 SECTIONS
 {
-  /* The startup code */
+  /* Vector Table */
   .isr_vector :
   {
     . = ALIGN(4);
@@ -24,7 +41,7 @@ SECTIONS
     . = ALIGN(4);
   } >FLASH
 
-  /* Program code */
+  /* Code */
   .text :
   {
     . = ALIGN(4);
@@ -39,7 +56,7 @@ SECTIONS
     _etext = .;
   } >FLASH
 
-  /* Constant data */
+  /* Read-only data */
   .rodata :
   {
     . = ALIGN(4);
@@ -48,18 +65,20 @@ SECTIONS
     . = ALIGN(4);
   } >FLASH
 
-  /* -------------------------------
-     Custom ROM data section
-  --------------------------------*/
-  .romdata :
+  /* FATFS + ROM reserved section */
+  .store (NOLOAD) :
   {
-    __rom_start__ = .;
-    KEEP(*(.rom))
-    __rom_end__ = .;
-  } >ROMSTORE
+    __store_start__ = .;
+    KEEP(*(.store))
+    . = ALIGN(4);
+    __store_end__ = .;
+  } >STORE
 
-  /* ARM exception tables */
-  .ARM.extab (READONLY) : { *(.ARM.extab* .gnu.linkonce.armextab.*) } >FLASH
+  .ARM.extab (READONLY) :
+  {
+    *(.ARM.extab* .gnu.linkonce.armextab.*)
+  } >FLASH
+
   .ARM (READONLY) :
   {
     __exidx_start = .;
@@ -67,15 +86,14 @@ SECTIONS
     __exidx_end = .;
   } >FLASH
 
-  /* C++ init arrays */
-  .preinit_array (READONLY) :
+  .preinit_array :
   {
     PROVIDE_HIDDEN (__preinit_array_start = .);
     KEEP (*(.preinit_array*))
     PROVIDE_HIDDEN (__preinit_array_end = .);
   } >FLASH
 
-  .init_array (READONLY) :
+  .init_array :
   {
     PROVIDE_HIDDEN (__init_array_start = .);
     KEEP (*(SORT(.init_array.*)))
@@ -83,7 +101,7 @@ SECTIONS
     PROVIDE_HIDDEN (__init_array_end = .);
   } >FLASH
 
-  .fini_array (READONLY) :
+  .fini_array :
   {
     PROVIDE_HIDDEN (__fini_array_start = .);
     KEEP (*(SORT(.fini_array.*)))
@@ -91,11 +109,11 @@ SECTIONS
     PROVIDE_HIDDEN (__fini_array_end = .);
   } >FLASH
 
-  /* Initialized data */
+  /* Data section */
   _sidata = LOADADDR(.data);
+
   .data :
   {
-    . = ALIGN(4);
     _sdata = .;
     *(.data)
     *(.data*)
@@ -113,17 +131,16 @@ SECTIONS
     PROVIDE(__tdata_end = .);
   } >RAM AT> FLASH
 
-  /* Uninitialized sections */
-  .tbss (NOLOAD) : ALIGN(4)
+  .tbss (NOLOAD) :
   {
     _sbss = .;
     __bss_start__ = _sbss;
     *(.tbss .tbss.*)
     . = ALIGN(4);
-    PROVIDE( __tbss_end = . );
+    PROVIDE(__tbss_end = .);
   } >RAM
 
-  .bss (NOLOAD) : ALIGN(4)
+  .bss (NOLOAD) :
   {
     *(.bss)
     *(.bss*)
@@ -131,24 +148,23 @@ SECTIONS
     . = ALIGN(4);
     _ebss = .;
     __bss_end__ = _ebss;
+    PROVIDE(__bss_end = .);
+    PROVIDE(end = .);
+    PROVIDE(_end = .);
   } >RAM
 
-  /* Heap + Stack */
   ._user_heap_stack (NOLOAD) :
   {
     . = ALIGN(8);
-    PROVIDE ( end = . );
-    PROVIDE ( _end = . );
     . = . + _Min_Heap_Size;
     . = . + _Min_Stack_Size;
     . = ALIGN(8);
   } >RAM
 
-  /* Remove unused stdlib */
   /DISCARD/ :
   {
-    libc.a:* ( * )
-    libm.a:* ( * )
-    libgcc.a:* ( * )
+    libc.a:* (*)
+    libm.a:* (*)
+    libgcc.a:* (*)
   }
 }
