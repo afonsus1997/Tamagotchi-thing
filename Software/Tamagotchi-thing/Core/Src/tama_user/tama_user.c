@@ -1,4 +1,6 @@
 #include "tama_user.h"
+#include "ssd1306.h"
+#include "u8g2.h"
 
 
 uint16_t current_freq = 0; 
@@ -89,29 +91,39 @@ void hal_sleep_until(timestamp_t ts)
 
 void hal_update_screen(void)
 {
-	// No need, this will be handled externally
-	tama_draw_tamalib_screen();
-	u8g2_UpdateDisplay(&u8g2);
+ 	u8g2_ClearBuffer(&u8g2);       // Clear previous frame
+	u8g2_SetDrawColor(&u8g2, White);   // Draw in white
+	tama_draw_tamalib_screen();    // Draw pixel data
+	u8g2_SendBuffer(&u8g2);
 }
+
 
 void hal_set_lcd_matrix(u8_t x, u8_t y, bool_t val)
 {
 	matrix_buffer[y][x] = val;
 }
 
+static bool_t is_calling = 0;
+
+// void hal_set_lcd_icon(u8_t icon, bool_t val)
+// {
+// 	if (icon == 7 && icon_buffer[icon] != val) {
+// 		/* The Tamagotchi started or stopped calling */
+// 		// if (val && menu_is_visible()) {
+// 			// menu_close();
+// 		// }
+
+// 		// is_calling = val;
+
+// 		update_led();
+// 	}
+
+// 	icon_buffer[icon] = val;
+// }
+
 void hal_set_lcd_icon(u8_t icon, bool_t val)
 {
-	if (icon == 7 && icon_buffer[icon] != val) {
-		/* The Tamagotchi started or stopped calling */
-		// if (val && menu_is_visible()) {
-			// menu_close();
-		// }
-
-		// is_calling = val;
-
-		// update_led();
-	}
-
+	LOG_INFO("hal_set_lcd_icon: icon=%d, val=%d", icon, val);
 	icon_buffer[icon] = val;
 }
 

@@ -25,15 +25,25 @@
 #define AUTO_SAVE_MINUTES 60    // Auto save for every hour (to preserve EEPROM lifespan)
 #define ENABLE_LOAD_STATE_FROM_EEPROM 
 
-#define PIXEL_SIZE					3
 #define ICON_SIZE					8
 #define ICON_NUM 8
 #define ICON_STRIDE_X					24
 #define ICON_STRIDE_Y					56
 #define ICON_OFFSET_X					24
 #define ICON_OFFSET_Y					0
-#define LCD_OFFET_X					16
-#define LCD_OFFET_Y					8
+#define LCD_OFFET_X					0//16
+#define LCD_OFFET_Y					0//8
+
+#define SCREEN_WIDTH   128
+#define SCREEN_HEIGHT   64
+
+// Calculate scale that fits both width and height
+#define PIXEL_SIZE   ( (SCREEN_WIDTH / LCD_WIDTH < SCREEN_HEIGHT / LCD_HEIGHT) ? \
+                       (SCREEN_WIDTH / LCD_WIDTH) : (SCREEN_HEIGHT / LCD_HEIGHT) )
+
+// Calculate offsets to center the image
+#define LCD_OFFSET_X  ((SCREEN_WIDTH - (LCD_WIDTH * PIXEL_SIZE)) / 2)
+#define LCD_OFFSET_Y  ((SCREEN_HEIGHT - (LCD_HEIGHT * PIXEL_SIZE)) / 2)
 
 #define TAMALIB_FREQ					32768 // Hz
 

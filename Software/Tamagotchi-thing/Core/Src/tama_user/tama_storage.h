@@ -10,7 +10,7 @@
 #define ROM_BUILT_IN
 
 #ifdef ROM_BUILT_IN
-#include "rom_12bit.h"
+#include "rom_tamatool.h"
 #endif
 
 #endif  //!__TAMA_STORAGE__H__
