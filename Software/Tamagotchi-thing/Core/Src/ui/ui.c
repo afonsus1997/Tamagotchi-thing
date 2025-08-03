@@ -65,17 +65,6 @@ void ui_init_display() {
 
 // Call repeatedly in your main loop
 void ui_loop() {
-    // u8g2_ClearBuffer(&u8g2);
-    // Draw title and line at top
-    // u8g2_SetFont(&u8g2, u8g2_font_t0_15b_tr);
-    // u8g2_DrawStr(&u8g2, 3, 13, "Main Menu");
-    // u8g2_DrawLine(&u8g2, 0, 15, 127, 15);
-
-    // Draw the current form with cursor and menu entries
-    // mui_Draw(&mui);
-
-    // u8g2_SendBuffer(&u8g2);
-
   u8g2_SetFont(&u8g2, u8g2_font_helvR08_tr);
   if ( mui_IsFormActive(&mui) )
   {

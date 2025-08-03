@@ -43,7 +43,7 @@ file(GLOB_RECURSE TAMALIB_SOURCES
 
 # Your project source files
 set(PROJECT_SOURCES
-    ${CMAKE_CURRENT_SOURCE_DIR}/Proprietary/rom_12bit.c # For tama binary
+    ${CMAKE_CURRENT_SOURCE_DIR}/Proprietary/rom_12bit.c
     Core/Src/userio/userio.c
     Core/Src/ui/ui.c
     Core/Src/ui/forms.c
@@ -90,14 +90,13 @@ target_include_directories(${PROJECT_NAME} PRIVATE
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/log
     ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/tinyusb/src
     ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/tinyusb/src/class/cdc
-    # ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/tinyusb/src/class/msc
     ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/tinyusb/src/portable/stm32/stm32l0
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/lwbtn/lwbtn/src/include/lwbtn
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/lwbtn/lwbtn/src/include
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/tamalib
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src/tama_user
     ${CMAKE_CURRENT_SOURCE_DIR}/Core/Src
-    ${CMAKE_CURRENT_SOURCE_DIR}/Proprietary # For tama binary
+    ${CMAKE_CURRENT_SOURCE_DIR}/Proprietary
 )
 
 target_compile_definitions(${PROJECT_NAME} PRIVATE
@@ -109,8 +108,20 @@ target_compile_definitions(${PROJECT_NAME} PRIVATE
     LWBTN_IGNORE_USER_OPTS=1
 )
 
-
 # Link libraries (STM32CubeMX and HAL libs)
 target_link_libraries(${PROJECT_NAME}
     stm32cubemx
+)
+
+set(MAP_FILE ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.map)
+target_link_options(${PROJECT_NAME} PRIVATE
+    -Wl,-Map=${MAP_FILE},--cref
+)
+
+add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
+    COMMAND ${CMAKE_SIZE} -A ${PROJECT_NAME}.elf > ${PROJECT_NAME}_sections.txt
+    COMMAND ${CMAKE_SIZE} ${PROJECT_NAME}.elf
+    COMMAND arm-none-eabi-nm -S --size-sort ${PROJECT_NAME}.elf > ${PROJECT_NAME}_all_symbols.txt
+    COMMAND tail -n 100 ${PROJECT_NAME}_all_symbols.txt > ${PROJECT_NAME}_top_symbols.txt
+    COMMENT "Generated detailed memory usage reports: sections, all symbols, top 100 symbols"
 )

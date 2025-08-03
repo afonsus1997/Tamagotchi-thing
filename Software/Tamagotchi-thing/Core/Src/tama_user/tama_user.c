@@ -9,19 +9,6 @@ uint16_t time_shift = 0;
 bool_t matrix_buffer[LCD_HEIGHT][LCD_WIDTH] = {{0}};
 bool_t icon_buffer[ICON_NUM] = {0};
 
-void tama_user_calculate_time_shift(){
-	while (((MCU_TIME_FREQ_X1000 << time_shift) < TAMALIB_FREQ * 1000) || (MCU_TIME_FREQ_X1000 << time_shift) % 1000) {
-		time_shift++;
-	}
-}
-
-void tama_user_init(){
-	tama_user_calculate_time_shift();
-	if (tamalib_init((const u12_t *) g_program, NULL, (MCU_TIME_FREQ_X1000 << time_shift)/1000)) {
-			LOG_ERROR("Tamalib initialization error!");
-		}
-}
-
 
 hal_t hal = {
 	.malloc = &hal_malloc, //OK
@@ -38,6 +25,20 @@ hal_t hal = {
 	.play_frequency = &hal_play_frequency,
 	.handler = &hal_handler,
 };
+
+void tama_user_calculate_time_shift(){
+	while (((MCU_TIME_FREQ_X1000 << time_shift) < TAMALIB_FREQ * 1000) || (MCU_TIME_FREQ_X1000 << time_shift) % 1000) {
+		time_shift++;
+	}
+}
+
+void tama_user_init(){
+	tama_user_calculate_time_shift();
+	tamalib_register_hal(&hal);
+	if (tamalib_init((const u12_t *) g_program, NULL, (MCU_TIME_FREQ_X1000 << time_shift)/1000)) {
+			LOG_ERROR("Tamalib initialization error!");
+	}
+}
 
 
 /* No need to support breakpoints */
@@ -74,7 +75,7 @@ timestamp_t hal_get_timestamp(void)
     return (timestamp_t)(time_get() << time_shift);
 }
 
-extern volatile int tamalib_is_late;  // make sure this is declared somewhere
+// extern volatile int tamalib_is_late;  // make sure this is declared somewhere
 
 void hal_sleep_until(timestamp_t ts)
 {
@@ -83,13 +84,14 @@ void hal_sleep_until(timestamp_t ts)
         time_delay(US_TO_MCU_TIME(50));  // delay ~50 microseconds
     }
 
-    tamalib_is_late = 0;
+    // tamalib_is_late = 0;
 }
 
 void hal_update_screen(void)
 {
 	// No need, this will be handled externally
-	// u8g2_UpdateDisplay(&u8g2);
+	tama_draw_tamalib_screen();
+	u8g2_UpdateDisplay(&u8g2);
 }
 
 void hal_set_lcd_matrix(u8_t x, u8_t y, bool_t val)

@@ -119,18 +119,11 @@ int main(void)
   ui_init_display();
   userio_init();
   HAL_TIM_Base_Start_IT(&htim7);
+  HAL_TIM_Base_Start_IT(&htim6);
   usb_user_init();
   log_init_printf(LOG_INT);
   tama_user_init();
   LOG_INFO("Initialization complete");
-  
-  // u8g2_SetDrawColor(&u8g2, Black);
-  // u8g2_DrawBox(&u8g2, 0, 0, 128, 64);
-  // u8g2_UpdateDisplay(&u8g2);
-  // u8g2_SetDrawColor(&u8g2, White);
-  // u8g2_DrawBox(&u8g2, 0, 0, 128, 64);
-  // u8g2_UpdateDisplay(&u8g2);
-  
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -140,9 +133,10 @@ int main(void)
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    // ui_loop();
-    userio_process();
-    tamalib_step();
+    ui_loop();
+    // userio_process();
+    tamalib_mainloop();
+    // tamalib_step();
 
     // usb_user_task();
     
@@ -234,7 +228,11 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   /* USER CODE BEGIN Callback 1 */
   if (htim->Instance == TIM7)
   {
-      ui_force_redraw();  
+    // ui_force_redraw();  
+  }
+
+  if (htim->Instance == TIM6){
+    TIM6_DAC_IRQHandler_user();
   }
   /* USER CODE END Callback 1 */
 }

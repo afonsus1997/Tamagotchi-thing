@@ -304,7 +304,8 @@ void time_delay(mcu_time_t time)
     time_wait_until(time_get() + time);
 }
 
-
+void system_disable_irq(void) { __disable_irq(); }
+void system_enable_irq(void)  { __enable_irq();  }
 
 /**
  * @brief Get the current extended time (32-bit) combining TIM6 counter and overflow count.
@@ -319,12 +320,13 @@ mcu_time_t time_get(void)
 
     t = ticks_h;
 
+    cnt = __HAL_TIM_GET_COUNTER(&htim6);
+
     // Check if an update (overflow) event is pending but interrupt not yet processed
     if (__HAL_TIM_GET_FLAG(&htim6, TIM_FLAG_UPDATE) != RESET) {
         t++;
+        cnt = __HAL_TIM_GET_COUNTER(&htim6);
     }
-
-    cnt = __HAL_TIM_GET_COUNTER(&htim6);
 
     system_enable_irq();
 
