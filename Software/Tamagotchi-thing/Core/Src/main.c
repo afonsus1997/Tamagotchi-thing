@@ -128,20 +128,27 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  while (1)
-  {
+  // while (1)
+  // {
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    ui_loop();
+    // ui_loop();
     // userio_process();
-    tamalib_mainloop();
+    // tamalib_mainloop();
     // tamalib_step();
-
     // usb_user_task();
-    
-    
-    
+  // }
+
+while (1) {
+    tamalib_mainloop();
+
+    // Force regular display updates (e.g., 20 FPS)
+    static uint32_t last_update = 0;
+    if (HAL_GetTick() - last_update >= 50) { // 50ms = 20 FPS
+        hal_update_screen();
+        last_update = HAL_GetTick();
+    }
   }
   /* USER CODE END 3 */
 }

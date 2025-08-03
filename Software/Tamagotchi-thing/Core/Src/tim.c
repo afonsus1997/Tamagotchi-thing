@@ -106,7 +106,7 @@ void MX_TIM6_Init(void)
 
   /* USER CODE END TIM6_Init 1 */
   htim6.Instance = TIM6;
-  htim6.Init.Prescaler = 15999;   // example: assuming 16MHz clock, prescale to 1kHz tick (1ms tick)
+  htim6.Init.Prescaler = 121;   // example: assuming 16MHz clock, 131072khz
   htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim6.Init.Period = 0xFFFF;
   htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
