@@ -189,4 +189,11 @@ void USB_IRQHandler(void)
 
 /* USER CODE BEGIN 1 */
 
+extern RTC_HandleTypeDef hrtc;
+
+void RTC_WKUP_IRQHandler(void)
+{
+    HAL_RTCEx_WakeUpTimerIRQHandler(&hrtc);
+}
+
 /* USER CODE END 1 */

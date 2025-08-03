@@ -12,7 +12,7 @@
   *
   * This software is licensed under terms that can be found in the LICENSE file
   * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
+  * If no LICENSE file is provided, it is provided AS-IS.
   *
   ******************************************************************************
   */
@@ -35,10 +35,18 @@ extern "C" {
 extern RTC_HandleTypeDef hrtc;
 
 /* USER CODE BEGIN Private defines */
-
+#define MCU_TIME_FREQ_X1000 32768000UL
 /* USER CODE END Private defines */
 
 void MX_RTC_Init(void);
+
+/* Declare the tick counter variable for external access */
+extern volatile uint32_t rtc_tick_counter;
+
+uint32_t RTC_GetTick(void);
+
+/* Prototype for the wakeup timer callback */
+void HAL_RTCEx_WakeUpTimerEventCallback(RTC_HandleTypeDef *hrtc);
 
 /* USER CODE BEGIN Prototypes */
 
@@ -49,4 +57,3 @@ void MX_RTC_Init(void);
 #endif
 
 #endif /* __RTC_H__ */
-

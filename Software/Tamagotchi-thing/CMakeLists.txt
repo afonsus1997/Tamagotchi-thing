@@ -52,6 +52,7 @@ set(PROJECT_SOURCES
     Core/Src/flash/flash.c
     Core/Src/flash/flash_glue.c
     Core/Src/tama_user/tama_user.c
+    Core/Src/tama_user/tama_storage.c
     Core/Src/ssd1306.c
     Core/Src/log/log.c
     Core/Src/u8g2_stm32L0.c

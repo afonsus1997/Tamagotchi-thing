@@ -30,7 +30,10 @@ void log_set_timestamp_fn(uint32_t (*ts_fn)(void)) {
     timestamp_fn = ts_fn;
 }
 
-void log_printf_level(log_level_t level, const char* fmt, ...) {
+
+
+
+void vlog_printf_level(log_level_t level, const char* fmt, va_list args) {
     if ((current_level & level) == 0 || log_write_fn == NULL) {
         return;
     }
@@ -38,21 +41,14 @@ void log_printf_level(log_level_t level, const char* fmt, ...) {
     char buf[256];
     int len = 0;
 
-    // Add timestamp if available
     if (timestamp_fn) {
         len += snprintf(buf + len, sizeof(buf) - len, "[%lu] ", timestamp_fn());
     }
 
-    // Add log level string
     len += snprintf(buf + len, sizeof(buf) - len, "[%s] ", get_level_str(level));
 
-    // Format the actual log message
-    va_list args;
-    va_start(args, fmt);
     len += vsnprintf(buf + len, sizeof(buf) - len, fmt, args);
-    va_end(args);
 
-    // Ensure newline
     if (len < (int)(sizeof(buf) - 2)) {
         buf[len++] = '\n';
         buf[len] = '\0';
@@ -61,7 +57,15 @@ void log_printf_level(log_level_t level, const char* fmt, ...) {
     log_write_fn(buf, len);
 }
 
-static void log_write_printf(const char* str, size_t len) {
+void log_printf_level(log_level_t level, const char* fmt, ...) {
+    va_list args;
+    va_start(args, fmt);
+    vlog_printf_level(level, fmt, args);
+    va_end(args);
+}
+
+
+void log_write_printf(const char* str, size_t len) {
     printf("%.*s", (int)len, str);
 }
 

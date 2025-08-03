@@ -3,7 +3,7 @@
   ******************************************************************************
   * @file    rtc.c
   * @brief   This file provides code for the configuration
-  *          of the RTC instances.
+  *          of the RTC instances and a tick counter that increments every second.
   ******************************************************************************
   * @attention
   *
@@ -21,6 +21,9 @@
 #include "rtc.h"
 
 /* USER CODE BEGIN 0 */
+#include <stdint.h>
+
+volatile uint32_t rtc_tick_counter = 0; // increments every RTC second
 
 /* USER CODE END 0 */
 
@@ -87,6 +90,15 @@ void MX_RTC_Init(void)
   {
     Error_Handler();
   }
+
+  /* Enable RTC Wakeup interrupt every 1 second */
+  // RTC Wakeup counter clocked by RTCCLK / 16, so to get 1Hz:
+  // wakeup counter = (RTC clock freq / 16) - 1 = (32768 / 16) - 1 = 2047
+  if (HAL_RTCEx_SetWakeUpTimer_IT(&hrtc, 2047, RTC_WAKEUPCLOCK_RTCCLK_DIV16) != HAL_OK)
+  {
+    Error_Handler();
+  }
+
   /* USER CODE BEGIN RTC_Init 2 */
 
   /* USER CODE END RTC_Init 2 */
@@ -103,6 +115,11 @@ void HAL_RTC_MspInit(RTC_HandleTypeDef* rtcHandle)
   /* USER CODE END RTC_MspInit 0 */
     /* RTC clock enable */
     __HAL_RCC_RTC_ENABLE();
+
+    /* Enable the RTC WakeUp IRQ */
+    HAL_NVIC_SetPriority(RTC_WKUP_IRQn, 0, 0);
+    HAL_NVIC_EnableIRQ(RTC_WKUP_IRQn);
+
   /* USER CODE BEGIN RTC_MspInit 1 */
 
   /* USER CODE END RTC_MspInit 1 */
@@ -119,6 +136,10 @@ void HAL_RTC_MspDeInit(RTC_HandleTypeDef* rtcHandle)
   /* USER CODE END RTC_MspDeInit 0 */
     /* Peripheral clock disable */
     __HAL_RCC_RTC_DISABLE();
+
+    /* Disable the RTC WakeUp IRQ */
+    HAL_NVIC_DisableIRQ(RTC_WKUP_IRQn);
+
   /* USER CODE BEGIN RTC_MspDeInit 1 */
 
   /* USER CODE END RTC_MspDeInit 1 */
@@ -126,5 +147,23 @@ void HAL_RTC_MspDeInit(RTC_HandleTypeDef* rtcHandle)
 }
 
 /* USER CODE BEGIN 1 */
+
+/**
+  * @brief RTC WakeUp timer callback called every 1 second
+  * @param hrtc RTC handle pointer
+  */
+void HAL_RTCEx_WakeUpTimerEventCallback(RTC_HandleTypeDef *hrtc)
+{
+    rtc_tick_counter++;
+}
+
+/**
+  * @brief Get current RTC tick counter value
+  * @retval Tick count in seconds since RTC init/reset
+  */
+uint32_t RTC_GetTick(void)
+{
+    return rtc_tick_counter;
+}
 
 /* USER CODE END 1 */

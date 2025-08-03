@@ -2,6 +2,7 @@
 
 #include <stdint.h>
 #include <stddef.h>
+#include <stdarg.h>
 #include "main.h"
 
 
@@ -20,6 +21,8 @@ void log_init(void (*write_fn)(const char*, size_t));
 void log_init_printf(uint8_t level);
 void log_set_level(log_level_t level);
 void log_set_timestamp_fn(uint32_t (*ts_fn)(void));
+void log_printf_level(log_level_t level, const char* fmt, ...);
+void vlog_printf_level(log_level_t level, const char* fmt, va_list args);
 void log_printf_level(log_level_t level, const char* fmt, ...);
 
 #define LOG_DEBUG(...)   log_printf_level(LOG_INT, __VA_ARGS__)
