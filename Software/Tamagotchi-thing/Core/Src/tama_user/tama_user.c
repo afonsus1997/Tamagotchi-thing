@@ -16,9 +16,10 @@ void tama_user_calculate_time_shift(){
 }
 
 void tama_user_init(){
-if (tamalib_init((const u12_t *) g_program, NULL, (MCU_TIME_FREQ_X1000 << time_shift)/1000)) {
-		LOG_ERROR("Tamalib initialization error!");
-	}
+	tama_user_calculate_time_shift();
+	if (tamalib_init((const u12_t *) g_program, NULL, (MCU_TIME_FREQ_X1000 << time_shift)/1000)) {
+			LOG_ERROR("Tamalib initialization error!");
+		}
 }
 
 
