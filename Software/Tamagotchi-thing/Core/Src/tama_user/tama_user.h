@@ -17,9 +17,10 @@
 #include "rtc.h"
 #include "ui.h"
 #include "tim.h"
+#include "lptim.h"
 #include "tama_storage.h"
 
-#define TAMA_DISPLAY_FRAMERATE  3   // 3 is optimal for Arduino UNO
+#define TAMA_DISPLAY_FRAMERATE  30   // 3 is optimal for Arduino UNO
 #define ENABLE_TAMA_SOUND
 #define ENABLE_AUTO_SAVE_STATUS
 #define AUTO_SAVE_MINUTES 60    // Auto save for every hour (to preserve EEPROM lifespan)

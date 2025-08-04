@@ -1,9 +1,9 @@
 /* USER CODE BEGIN Header */
 /**
   ******************************************************************************
-  * @file    tim.h
+  * @file    lptim.h
   * @brief   This file contains all the function prototypes for
-  *          the tim.c file
+  *          the lptim.c file
   ******************************************************************************
   * @attention
   *
@@ -18,8 +18,8 @@
   */
 /* USER CODE END Header */
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __TIM_H__
-#define __TIM_H__
+#ifndef __LPTIM_H__
+#define __LPTIM_H__
 
 #ifdef __cplusplus
 extern "C" {
@@ -29,28 +29,40 @@ extern "C" {
 #include "main.h"
 
 /* USER CODE BEGIN Includes */
-
+#include "hal_types.h"
 /* USER CODE END Includes */
 
-extern TIM_HandleTypeDef htim3;
+extern LPTIM_HandleTypeDef hlptim1;
 
-extern TIM_HandleTypeDef htim7;
+
 
 /* USER CODE BEGIN Private defines */
+typedef uint32_t mcu_time_t;
 
+#define US_TO_MCU_TIME(t)				((t * MCU_TIME_FREQ_NUM + MCU_TIME_FREQ_DEN - 1)/MCU_TIME_FREQ_DEN)
+#define MS_TO_MCU_TIME(t)				(US_TO_MCU_TIME(t * 1000ULL))
+
+#define MCU_TIME_FREQ_X1000 				((1000000000ULL/MCU_TIME_FREQ_DEN) * MCU_TIME_FREQ_NUM)
+
+
+/* MCU time frequency is LSE/4 = 8,192 kHz = ((1000000/MCU_TIME_FREQ_DEN) * MCU_TIME_FREQ_NUM) */
+#define MCU_TIME_FREQ_NUM					128ULL
+#define MCU_TIME_FREQ_DEN					15625ULL
 /* USER CODE END Private defines */
 
-void MX_TIM3_Init(void);
-void MX_TIM7_Init(void);
-
-void HAL_TIM_MspPostInit(TIM_HandleTypeDef *htim);
+void MX_LPTIM1_Init(void);
 
 /* USER CODE BEGIN Prototypes */
+void time_init(void);
+mcu_time_t time_get(void);
+void time_wait_until(mcu_time_t time);
+void time_delay(mcu_time_t time);
+
 /* USER CODE END Prototypes */
 
 #ifdef __cplusplus
 }
 #endif
 
-#endif /* __TIM_H__ */
+#endif /* __LPTIM_H__ */
 

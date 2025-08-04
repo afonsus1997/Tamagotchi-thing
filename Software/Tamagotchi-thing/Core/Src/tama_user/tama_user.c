@@ -1,15 +1,103 @@
 #include "tama_user.h"
 #include "ssd1306.h"
+#include "tamalib.h"
 #include "u8g2.h"
+#include "log.h"
 
-uint16_t current_freq = 0; 
+
+uint16_t current_freq = 0;
 uint8_t runOnceBool = 0;
 unsigned long lastSaveTimestamp = 0;
-uint16_t time_shift = 0;
 
+// Buffers for LCD matrix and icon state
 bool_t matrix_buffer[LCD_HEIGHT][LCD_WIDTH] = {{0}};
 bool_t icon_buffer[ICON_NUM] = {0};
 
+static bool_t is_calling = 0;
+
+// ---------------------------------------------
+// HAL: Memory Management
+// ---------------------------------------------
+void *hal_malloc(u32_t size) { return NULL; }
+void hal_free(void *ptr) {}
+void hal_halt(void) { LOG_ERROR("Tamalib halted!\n"); }
+
+// ---------------------------------------------
+// HAL: Logging
+// ---------------------------------------------
+bool_t hal_is_log_enabled(log_level_t level) { return 0; }
+
+void hal_log(log_level_t level, char *buff, ...) {
+    va_list args;
+    va_start(args, buff);
+    vlog_printf_level(level, buff, args);
+    va_end(args);
+}
+
+// ---------------------------------------------
+// HAL: Timing
+// ---------------------------------------------
+timestamp_t hal_get_timestamp(void) {
+    // time_get() must return MCU time in ticks
+    return time_get(); 
+}
+
+void hal_sleep_until(timestamp_t t) {
+    time_wait_until(t); 
+}
+
+// ---------------------------------------------
+// HAL: LCD Drawing
+// ---------------------------------------------
+void hal_update_screen(void) {
+    u8g2_ClearBuffer(&u8g2);
+    u8g2_SetDrawColor(&u8g2, White);
+    tama_draw_tamalib_screen();
+    u8g2_SendBuffer(&u8g2);
+}
+
+void hal_set_lcd_matrix(u8_t x, u8_t y, bool_t val) {
+    if (x < LCD_WIDTH && y < LCD_HEIGHT) {
+        matrix_buffer[y][x] = val;
+    }
+}
+
+void hal_set_lcd_icon(u8_t icon, bool_t val) {
+    if (icon < ICON_NUM) {
+        LOG_INFO("hal_set_lcd_icon: icon=%d, val=%d", icon, val);
+        icon_buffer[icon] = val;
+
+        if (icon == 7) {  // Handle "calling" state if needed
+            is_calling = val;
+        }
+    }
+}
+
+// ---------------------------------------------
+// HAL: Audio (stubbed)
+// ---------------------------------------------
+void hal_set_frequency(u32_t freq) {
+    current_freq = freq;
+}
+
+void hal_play_frequency(bool_t en) {
+    if (en) {
+        // enable buzzer at current_freq
+    } else {
+        // disable buzzer
+    }
+}
+
+// ---------------------------------------------
+// HAL: Dummy Event Handler
+// ---------------------------------------------
+int hal_handler(void) {
+    return 0;
+}
+
+// ---------------------------------------------
+// HAL Struct
+// ---------------------------------------------
 hal_t hal = {
     .malloc = &hal_malloc,
     .free = &hal_free,
@@ -26,84 +114,38 @@ hal_t hal = {
     .handler = &hal_handler,
 };
 
-void tama_user_calculate_time_shift() {
-    time_shift = 0;
-    while (((MCU_TIME_FREQ_NUM >> time_shift) > TAMALIB_FREQ) && (time_shift < 8)) {
-        time_shift++;
-    }
-}
-
-
-void tama_user_init() {
-    tama_user_calculate_time_shift();
+// ---------------------------------------------
+// Tamalib Initialization
+// ---------------------------------------------
+void tama_user_init(void) {
     tamalib_register_hal(&hal);
 
-    LOG_INFO("Initializing Tamalib: MCU=%lu Hz, Virtual=%u Hz, shift=%u",
-             MCU_TIME_FREQ_NUM, TAMALIB_FREQ, time_shift);
+    uint32_t effective_freq = MCU_TIME_FREQ_NUM; // Should be in Hz
 
-    if (tamalib_init((const u12_t *) g_program, NULL, TAMALIB_FREQ)) {
+    LOG_INFO("Initializing Tamalib: MCU=%lu Hz (Target=%u Hz)", effective_freq, TAMALIB_FREQ);
+
+    if (tamalib_init((const u12_t *) g_program, NULL, effective_freq)) {
         LOG_ERROR("Tamalib initialization error!");
     }
+
+    tamalib_reset();
+    tamalib_set_exec_mode(EXEC_MODE_RUN);
 }
 
-/* HAL Allocations */
-void * hal_malloc(u32_t size) { return NULL; }
-void hal_free(void *ptr) {}
-void hal_halt(void) { LOG_ERROR("Internal TAMALIB ERROR!\n"); }
-
-bool_t hal_is_log_enabled(log_level_t level) { return 0; }
-void hal_log(log_level_t level, char *buff, ...) {
-    va_list args;
-    va_start(args, buff);
-    vlog_printf_level(level, buff, args);
-    va_end(args);
-}
-
-timestamp_t hal_get_timestamp(void)
-{
-    return (timestamp_t)(time_get() >> time_shift);
-}
-
-
-void hal_sleep_until(timestamp_t ts) {
-    while ((int32_t)(ts - hal_get_timestamp()) > 0) {
-        time_delay(US_TO_MCU_TIME(50));  // 50 µs delay to avoid busy spin
-    }
-}
-
-void hal_update_screen(void) {
-    u8g2_ClearBuffer(&u8g2);
-    u8g2_SetDrawColor(&u8g2, White);
-    tama_draw_tamalib_screen();
-    u8g2_SendBuffer(&u8g2);
-}
-
-void hal_set_lcd_matrix(u8_t x, u8_t y, bool_t val) {
-    matrix_buffer[y][x] = val;
-}
-
-static bool_t is_calling = 0;
-
-void hal_set_lcd_icon(u8_t icon, bool_t val) {
-    LOG_INFO("hal_set_lcd_icon: icon=%d, val=%d", icon, val);
-    icon_buffer[icon] = val;
-}
-
-void hal_set_frequency(u32_t freq) {}
-void hal_play_frequency(bool_t en) {}
-int hal_handler(void) { return 0; }
-
+// ---------------------------------------------
+// LCD Drawing Logic
+// ---------------------------------------------
 void tama_draw_tamalib_screen(void) {
     uint8_t i, j;
 
-    // Dot matrix pixels
+    // Dot matrix (pixels)
     for (j = 0; j < LCD_HEIGHT; j++) {
         for (i = 0; i < LCD_WIDTH; i++) {
             if (matrix_buffer[j][i]) {
-                u8g2_DrawBox(&u8g2, 
-                             i * PIXEL_SIZE + LCD_OFFET_X, 
-                             j * PIXEL_SIZE + LCD_OFFET_Y, 
-                             PIXEL_SIZE, 
+                u8g2_DrawBox(&u8g2,
+                             i * PIXEL_SIZE + LCD_OFFET_X,
+                             j * PIXEL_SIZE + LCD_OFFET_Y,
+                             PIXEL_SIZE,
                              PIXEL_SIZE);
             }
         }

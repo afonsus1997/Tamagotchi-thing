@@ -24,7 +24,12 @@
 /* USER CODE BEGIN Includes */
 #include "usb_user.h"
 #include "tim.h"
+#include "lptim.h"
+
+volatile uint32_t ticks_h = 0;
+
 /* USER CODE END Includes */
+
 
 /* Private typedef -----------------------------------------------------------*/
 /* USER CODE BEGIN TD */
@@ -57,7 +62,7 @@
 /* USER CODE END 0 */
 
 /* External variables --------------------------------------------------------*/
-extern TIM_HandleTypeDef htim6;
+extern LPTIM_HandleTypeDef hlptim1;
 extern TIM_HandleTypeDef htim7;
 extern PCD_HandleTypeDef hpcd_USB_FS;
 extern TIM_HandleTypeDef htim2;
@@ -147,6 +152,70 @@ void SysTick_Handler(void)
 /******************************************************************************/
 
 /**
+  * @brief This function handles LPTIM1 global interrupt / LPTIM1 wake-up interrupt through EXTI line 29.
+  */
+void LPTIM1_IRQHandler(void)
+{
+  /* USER CODE BEGIN LPTIM1_IRQn 0 */
+  /* Counter direction change up event */
+	if (__HAL_LPTIM_GET_FLAG(&hlptim1, LPTIM_FLAG_DOWN) != RESET) {
+		if (__HAL_LPTIM_GET_IT_SOURCE(&hlptim1, LPTIM_IT_DOWN) != RESET) {
+			__HAL_LPTIM_CLEAR_FLAG(&hlptim1, LPTIM_FLAG_DOWN);
+		}
+	}
+
+	/* Counter direction change down to up event */
+	if (__HAL_LPTIM_GET_FLAG(&hlptim1, LPTIM_FLAG_UP) != RESET) {
+		if (__HAL_LPTIM_GET_IT_SOURCE(&hlptim1, LPTIM_IT_UP) != RESET) {
+			__HAL_LPTIM_CLEAR_FLAG(&hlptim1, LPTIM_FLAG_UP);
+		}
+	}
+
+	/* Autoreload register update OK event */
+	if (__HAL_LPTIM_GET_FLAG(&hlptim1, LPTIM_FLAG_ARROK) != RESET) {
+		if (__HAL_LPTIM_GET_IT_SOURCE(&hlptim1, LPTIM_IT_ARROK) != RESET) {
+			__HAL_LPTIM_CLEAR_FLAG(&hlptim1, LPTIM_FLAG_ARROK);
+		}
+	}
+
+	/* Compare register update OK event */
+	if (__HAL_LPTIM_GET_FLAG(&hlptim1, LPTIM_FLAG_CMPOK) != RESET) {
+		if (__HAL_LPTIM_GET_IT_SOURCE(&hlptim1, LPTIM_IT_CMPOK) != RESET) {
+			__HAL_LPTIM_CLEAR_FLAG(&hlptim1, LPTIM_FLAG_CMPOK);
+		}
+	}
+
+	/* External trigger edge event */
+	if (__HAL_LPTIM_GET_FLAG(&hlptim1, LPTIM_FLAG_EXTTRIG) != RESET) {
+		if (__HAL_LPTIM_GET_IT_SOURCE(&hlptim1, LPTIM_IT_EXTTRIG) != RESET) {
+			__HAL_LPTIM_CLEAR_FLAG(&hlptim1, LPTIM_FLAG_EXTTRIG);
+		}
+	}
+
+	/* Compare match event */
+	if (__HAL_LPTIM_GET_FLAG(&hlptim1, LPTIM_FLAG_CMPM) != RESET) {
+		if (__HAL_LPTIM_GET_IT_SOURCE(&hlptim1, LPTIM_IT_CMPM) != RESET) {
+			__HAL_LPTIM_CLEAR_FLAG(&hlptim1, LPTIM_FLAG_CMPM);
+			/* Just wake the CPU */
+		}
+	}
+
+	/* Autoreload match event */
+	if (__HAL_LPTIM_GET_FLAG(&hlptim1, LPTIM_FLAG_ARRM) != RESET) {
+		if (__HAL_LPTIM_GET_IT_SOURCE(&hlptim1, LPTIM_IT_ARRM) != RESET) {
+			__HAL_LPTIM_CLEAR_FLAG(&hlptim1, LPTIM_FLAG_ARRM);
+			ticks_h++;
+		}
+	}
+  return;
+  /* USER CODE END LPTIM1_IRQn 0 */
+  HAL_LPTIM_IRQHandler(&hlptim1);
+  /* USER CODE BEGIN LPTIM1_IRQn 1 */
+
+  /* USER CODE END LPTIM1_IRQn 1 */
+}
+
+/**
   * @brief This function handles TIM2 global interrupt.
   */
 void TIM2_IRQHandler(void)
@@ -158,21 +227,6 @@ void TIM2_IRQHandler(void)
   /* USER CODE BEGIN TIM2_IRQn 1 */
 
   /* USER CODE END TIM2_IRQn 1 */
-}
-
-/**
-  * @brief This function handles TIM6 global interrupt and DAC1/DAC2 underrun error interrupts.
-  */
-void TIM6_DAC_IRQHandler(void)
-{
-  /* USER CODE BEGIN TIM6_DAC_IRQn 0 */
-  TIM6_DAC_IRQHandler_user();
-  return;
-  /* USER CODE END TIM6_DAC_IRQn 0 */
-  HAL_TIM_IRQHandler(&htim6);
-  /* USER CODE BEGIN TIM6_DAC_IRQn 1 */
-
-  /* USER CODE END TIM6_DAC_IRQn 1 */
 }
 
 /**

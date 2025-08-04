@@ -21,6 +21,7 @@
 #include "adc.h"
 #include "fatfs.h"
 #include "i2c.h"
+#include "lptim.h"
 #include "rtc.h"
 #include "spi.h"
 #include "tim.h"
@@ -111,15 +112,15 @@ int main(void)
   MX_USART4_UART_Init();
   MX_FATFS_Init();
   MX_USB_PCD_Init();
-  MX_TIM6_Init();
   MX_TIM7_Init();
+  MX_LPTIM1_Init();
   /* USER CODE BEGIN 2 */
   // Init OLED
   
   ui_init_display();
   userio_init();
   HAL_TIM_Base_Start_IT(&htim7);
-  HAL_TIM_Base_Start_IT(&htim6);
+  HAL_LPTIM_Counter_Start_IT(&hlptim1, 0xFFFF);
   usb_user_init();
   log_init_printf(LOG_INT);
   tama_user_init();
@@ -144,11 +145,11 @@ while (1) {
     tamalib_mainloop();
 
     // Force regular display updates (e.g., 20 FPS)
-    static uint32_t last_update = 0;
-    if (HAL_GetTick() - last_update >= 50) { // 50ms = 20 FPS
-        hal_update_screen();
-        last_update = HAL_GetTick();
-    }
+    // static uint32_t last_update = 0;
+    // if (HAL_GetTick() - last_update >= 50) { // 50ms = 20 FPS
+        // hal_update_screen();
+        // last_update = HAL_GetTick();
+    // }
   }
   /* USER CODE END 3 */
 }
@@ -181,7 +182,10 @@ void SystemClock_Config(void)
   RCC_OscInitStruct.HSIState = RCC_HSI_ON;
   RCC_OscInitStruct.HSICalibrationValue = RCC_HSICALIBRATION_DEFAULT;
   RCC_OscInitStruct.HSI48State = RCC_HSI48_ON;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_NONE;
+  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSI;
+  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLLMUL_4;
+  RCC_OscInitStruct.PLL.PLLDIV = RCC_PLLDIV_2;
   if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
   {
     Error_Handler();
@@ -191,20 +195,22 @@ void SystemClock_Config(void)
   */
   RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
                               |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_HSI;
+  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
   RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
   RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV1;
   RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_0) != HAL_OK)
+  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_1) != HAL_OK)
   {
     Error_Handler();
   }
   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_I2C3|RCC_PERIPHCLK_RTC
-                              |RCC_PERIPHCLK_USB;
+                              |RCC_PERIPHCLK_USB|RCC_PERIPHCLK_LPTIM1;
   PeriphClkInit.I2c3ClockSelection = RCC_I2C3CLKSOURCE_PCLK1;
   PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
   PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_HSI48;
+  PeriphClkInit.LptimClockSelection = RCC_LPTIM1CLKSOURCE_LSE;
+
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     Error_Handler();
@@ -238,9 +244,6 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
     // ui_force_redraw();  
   }
 
-  if (htim->Instance == TIM6){
-    TIM6_DAC_IRQHandler_user();
-  }
   /* USER CODE END Callback 1 */
 }
 
