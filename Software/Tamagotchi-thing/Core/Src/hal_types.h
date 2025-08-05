@@ -22,7 +22,7 @@
 
 #include <stdint.h>
 
-#include "lptim.h"
+#include "tim.h"
 
 typedef uint8_t bool_t;
 typedef uint8_t u4_t;

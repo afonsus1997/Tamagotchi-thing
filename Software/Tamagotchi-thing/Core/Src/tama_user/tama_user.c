@@ -4,7 +4,6 @@
 #include "u8g2.h"
 #include "log.h"
 
-
 uint16_t current_freq = 0;
 uint8_t runOnceBool = 0;
 unsigned long lastSaveTimestamp = 0;
@@ -14,6 +13,7 @@ bool_t matrix_buffer[LCD_HEIGHT][LCD_WIDTH] = {{0}};
 bool_t icon_buffer[ICON_NUM] = {0};
 
 static bool_t is_calling = 0;
+uint32_t time_shift = 0;
 
 // ---------------------------------------------
 // HAL: Memory Management
@@ -34,26 +34,20 @@ void hal_log(log_level_t level, char *buff, ...) {
     va_end(args);
 }
 
-// ---------------------------------------------
-// HAL: Timing
-// ---------------------------------------------
-timestamp_t hal_get_timestamp(void) {
-    // time_get() must return MCU time in ticks
-    return time_get(); 
-}
+
 
 void hal_sleep_until(timestamp_t t) {
-    time_wait_until(t); 
+    time_wait_until(t); // Blocks until target timestamp is reached
 }
 
 // ---------------------------------------------
 // HAL: LCD Drawing
 // ---------------------------------------------
 void hal_update_screen(void) {
-    u8g2_ClearBuffer(&u8g2);
-    u8g2_SetDrawColor(&u8g2, White);
-    tama_draw_tamalib_screen();
-    u8g2_SendBuffer(&u8g2);
+    u8g2_ClearBuffer(&u8g2);               // Clear frame buffer *before* drawing
+    u8g2_SetDrawColor(&u8g2, White);       // Set drawing color
+    tama_draw_tamalib_screen();           // Draw current frame contents
+    u8g2_SendBuffer(&u8g2);               // Send buffer to screen
 }
 
 void hal_set_lcd_matrix(u8_t x, u8_t y, bool_t val) {
@@ -78,11 +72,12 @@ void hal_set_lcd_icon(u8_t icon, bool_t val) {
 // ---------------------------------------------
 void hal_set_frequency(u32_t freq) {
     current_freq = freq;
+    // Setup buzzer frequency if needed
 }
 
 void hal_play_frequency(bool_t en) {
     if (en) {
-        // enable buzzer at current_freq
+        // enable buzzer using current_freq
     } else {
         // disable buzzer
     }
@@ -117,21 +112,28 @@ hal_t hal = {
 // ---------------------------------------------
 // Tamalib Initialization
 // ---------------------------------------------
+
+timestamp_t hal_get_timestamp(void) {
+    return (timestamp_t)(time_get());  // no shift
+}
+
 void tama_user_init(void) {
     tamalib_register_hal(&hal);
 
-    uint32_t effective_freq = MCU_TIME_FREQ_NUM; // Should be in Hz
+    // No need to compute time_shift
+    uint32_t effective_freq = MCU_TIME_FREQ_HZ;  // 131072
 
-    LOG_INFO("Initializing Tamalib: MCU=%lu Hz (Target=%u Hz)", effective_freq, TAMALIB_FREQ);
+    LOG_INFO("Initializing Tamalib with freq = %lu Hz", effective_freq);
 
-    if (tamalib_init((const u12_t *) g_program, NULL, effective_freq)) {
+    if (tamalib_init((const u12_t *) g_program, NULL,     if (tamalib_init((const u12_t *) g_program, NULL, 1000000)) {
+)) {
         LOG_ERROR("Tamalib initialization error!");
     }
 
+    cpu_set_speed(1);
     tamalib_reset();
     tamalib_set_exec_mode(EXEC_MODE_RUN);
 }
-
 // ---------------------------------------------
 // LCD Drawing Logic
 // ---------------------------------------------

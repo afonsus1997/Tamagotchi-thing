@@ -21,10 +21,10 @@
 #include "adc.h"
 #include "fatfs.h"
 #include "i2c.h"
-#include "lptim.h"
 #include "rtc.h"
 #include "spi.h"
 #include "tim.h"
+#include "u8g2.h"
 #include "usart.h"
 #include "usb.h"
 #include "gpio.h"
@@ -72,6 +72,56 @@ void SystemClock_Config(void);
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 
+void debug_blink_box(void) {
+    static timestamp_t last = 0;
+    static bool_t on = false;
+
+    timestamp_t now = hal_get_timestamp();
+    if ((now - last) >= MCU_TIME_FREQ_HZ) { // 1 second
+        last = now;
+        on = !on;
+
+        u8g2_ClearBuffer(&u8g2);
+        if (on) {
+            u8g2_DrawBox(&u8g2, 0, 0, 8, 8);  // small box in corner
+        }
+        u8g2_SendBuffer(&u8g2);
+    }
+}
+
+void debug_tick_counter(void) {
+    static timestamp_t last_ts = 0;
+    static uint32_t real_seconds = 0;
+
+    timestamp_t now = hal_get_timestamp();
+    static uint32_t tick_start = 0;
+
+    if (last_ts == 0) {
+        last_ts = now;
+        tick_start = now;
+    }
+
+    if ((now - last_ts) >= 32768) { // every approx second (just a guess for now)
+        last_ts = now;
+        real_seconds++;
+
+        // Estimate actual frequency
+        uint32_t ticks_elapsed = now - tick_start;
+        uint32_t freq_est = ticks_elapsed / real_seconds;
+
+        char buf[32];
+        u8g2_ClearBuffer(&u8g2);
+        u8g2_SetFont(&u8g2, u8g2_font_8x13_mn);
+        snprintf(buf, sizeof(buf), "Ticks: %lu", freq_est);
+        u8g2_DrawStr(&u8g2, 0, 12, buf);
+        snprintf(buf, sizeof(buf), "Ticks: %lu", __HAL_TIM_GET_COUNTER(&htim6));
+        u8g2_DrawStr(&u8g2, 0, 24, buf);
+
+        u8g2_SendBuffer(&u8g2);
+    }
+}
+
+
 /* USER CODE END 0 */
 
 /**
@@ -113,14 +163,14 @@ int main(void)
   MX_FATFS_Init();
   MX_USB_PCD_Init();
   MX_TIM7_Init();
-  MX_LPTIM1_Init();
+  MX_TIM6_Init();
   /* USER CODE BEGIN 2 */
   // Init OLED
   
   ui_init_display();
   userio_init();
   HAL_TIM_Base_Start_IT(&htim7);
-  HAL_LPTIM_Counter_Start_IT(&hlptim1, 0xFFFF);
+  HAL_TIM_Base_Start_IT(&htim6);
   usb_user_init();
   log_init_printf(LOG_INT);
   tama_user_init();
@@ -129,27 +179,16 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  // while (1)
-  // {
+  while (1)
+  {
+        tamalib_step();
+        hal_update_screen();
+  // tamalib_mainloop();
+  // debug_blink_box();
+  // debug_tick_counter();
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
-    // ui_loop();
-    // userio_process();
-    // tamalib_mainloop();
-    // tamalib_step();
-    // usb_user_task();
-  // }
-
-while (1) {
-    tamalib_mainloop();
-
-    // Force regular display updates (e.g., 20 FPS)
-    // static uint32_t last_update = 0;
-    // if (HAL_GetTick() - last_update >= 50) { // 50ms = 20 FPS
-        // hal_update_screen();
-        // last_update = HAL_GetTick();
-    // }
   }
   /* USER CODE END 3 */
 }
@@ -205,12 +244,10 @@ void SystemClock_Config(void)
     Error_Handler();
   }
   PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_I2C3|RCC_PERIPHCLK_RTC
-                              |RCC_PERIPHCLK_USB|RCC_PERIPHCLK_LPTIM1;
+                              |RCC_PERIPHCLK_USB;
   PeriphClkInit.I2c3ClockSelection = RCC_I2C3CLKSOURCE_PCLK1;
   PeriphClkInit.RTCClockSelection = RCC_RTCCLKSOURCE_LSE;
   PeriphClkInit.UsbClockSelection = RCC_USBCLKSOURCE_HSI48;
-  PeriphClkInit.LptimClockSelection = RCC_LPTIM1CLKSOURCE_LSE;
-
   if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK)
   {
     Error_Handler();
@@ -243,7 +280,9 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   {
     // ui_force_redraw();  
   }
-
+  if (htim->Instance == TIM6) {
+    tim_increment_ticks();  // 16-bit overflow occurred
+  }
   /* USER CODE END Callback 1 */
 }
 

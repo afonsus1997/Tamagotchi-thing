@@ -17,7 +17,6 @@
 #include "rtc.h"
 #include "ui.h"
 #include "tim.h"
-#include "lptim.h"
 #include "tama_storage.h"
 
 #define TAMA_DISPLAY_FRAMERATE  30   // 3 is optimal for Arduino UNO
