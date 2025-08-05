@@ -188,7 +188,7 @@ int main(void)
 
 	      timestamp_t ts;
         ts = g_hal->get_timestamp();
-		      if (ts - screen_ts >= 1000000) {
+		      if (ts - screen_ts >= 524288/4) {
 			      screen_ts = ts;
 			      g_hal->update_screen();
 		    }
