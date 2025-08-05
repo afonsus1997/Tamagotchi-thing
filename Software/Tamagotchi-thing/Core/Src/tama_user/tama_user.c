@@ -128,7 +128,7 @@ void tama_user_init(void) {
     if (tamalib_init((const u12_t *) g_program, NULL, effective_freq)) {
         LOG_ERROR("Tamalib initialization error!");
     }
-    
+
     cpu_set_speed(SET_FRAMERATE);
     tamalib_reset();
     tamalib_set_exec_mode(EXEC_MODE_RUN);

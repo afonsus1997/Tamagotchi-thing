@@ -105,7 +105,7 @@ void MX_TIM6_Init(void)
 
   /* USER CODE END TIM6_Init 1 */
   htim6.Instance = TIM6;
-  htim6.Init.Prescaler = 243;
+  htim6.Init.Prescaler = 15;
   htim6.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim6.Init.Period = 65535;
   htim6.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
@@ -308,19 +308,18 @@ void system_enable_irq(void) {
 
 mcu_time_t time_get(void)
 {
-    uint32_t high, low1, low2;
+    uint32_t high1, high2;
+    uint16_t low;
 
-    system_disable_irq();
-    high = ticks_h;
-    low1 = __HAL_TIM_GET_COUNTER(&htim6);
-    low2 = __HAL_TIM_GET_COUNTER(&htim6);
-    if (low2 < low1) {
-        high = ticks_h;
-        low1 = low2;
-    }
-    system_enable_irq();
+    do {
+        system_disable_irq();
+        high1 = ticks_h;
+        low = __HAL_TIM_GET_COUNTER(&htim6);
+        high2 = ticks_h;
+        system_enable_irq();
+    } while (high1 != high2);  // Timer overflowed during read
 
-    return ((high << 16) | low1);
+    return ((high1 << 16) | low);
 }
 
 void time_wait_until(mcu_time_t time)

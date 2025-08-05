@@ -23,7 +23,6 @@
 #include "i2c.h"
 #include "rtc.h"
 #include "spi.h"
-#include "stm32l0xx_hal.h"
 #include "tim.h"
 #include "usart.h"
 #include "usb.h"
@@ -189,7 +188,7 @@ int main(void)
 
 	      timestamp_t ts;
         ts = g_hal->get_timestamp();
-		      if (ts - screen_ts >= 131147/3) {
+		      if (ts - screen_ts >= 1000000) {
 			      screen_ts = ts;
 			      g_hal->update_screen();
 		    }
