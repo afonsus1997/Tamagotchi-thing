@@ -137,8 +137,7 @@ int main(void)
 
   /* MCU Configuration--------------------------------------------------------*/
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */  HAL_Init();
 
   /* USER CODE BEGIN Init */
 
@@ -181,9 +180,9 @@ int main(void)
   /* USER CODE BEGIN WHILE */
   while (1)
   {
-        tamalib_step();
-        hal_update_screen();
-  // tamalib_mainloop();
+        // tamalib_step();
+        // hal_update_screen();
+  tamalib_mainloop();
   // debug_blink_box();
   // debug_tick_counter();
     /* USER CODE END WHILE */

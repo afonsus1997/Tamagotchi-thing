@@ -125,8 +125,7 @@ void tama_user_init(void) {
 
     LOG_INFO("Initializing Tamalib with freq = %lu Hz", effective_freq);
 
-    if (tamalib_init((const u12_t *) g_program, NULL,     if (tamalib_init((const u12_t *) g_program, NULL, 1000000)) {
-)) {
+    if (tamalib_init((const u12_t *) g_program, NULL, effective_freq)) {
         LOG_ERROR("Tamalib initialization error!");
     }
 
