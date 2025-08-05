@@ -34,7 +34,8 @@ typedef uint32_t mcu_time_t;
 
 
 // Timer base frequency (TIM6): 131.072 kHz
-#define MCU_TIME_FREQ_HZ          (131072ULL)
+#define SET_FRAMERATE 3           //3fps for 131147ULL 
+#define MCU_TIME_FREQ_HZ          (131147ULL)
 #define MCU_TIME_FREQ_X1000       (MCU_TIME_FREQ_HZ * 1000ULL)
 #define US_TO_MCU_TIME(t)         (((t) * MCU_TIME_FREQ_HZ + 999999ULL) / 1000000ULL)
 #define MS_TO_MCU_TIME(t)         (((t) * MCU_TIME_FREQ_HZ + 999ULL) / 1000ULL)

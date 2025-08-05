@@ -23,8 +23,8 @@
 #include "i2c.h"
 #include "rtc.h"
 #include "spi.h"
+#include "stm32l0xx_hal.h"
 #include "tim.h"
-#include "u8g2.h"
 #include "usart.h"
 #include "usb.h"
 #include "gpio.h"
@@ -121,6 +121,8 @@ void debug_tick_counter(void) {
     }
 }
 
+static timestamp_t screen_ts = 0;
+
 
 /* USER CODE END 0 */
 
@@ -137,7 +139,8 @@ int main(void)
 
   /* MCU Configuration--------------------------------------------------------*/
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */  HAL_Init();
+  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+  HAL_Init();
 
   /* USER CODE BEGIN Init */
 
@@ -178,13 +181,19 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  ui_loop();
   while (1)
   {
-        // tamalib_step();
-        // hal_update_screen();
-  tamalib_mainloop();
-  // debug_blink_box();
-  // debug_tick_counter();
+        // tamalib_mainloop();
+        tamalib_step();
+
+	      timestamp_t ts;
+        ts = g_hal->get_timestamp();
+		      if (ts - screen_ts >= 131147/3) {
+			      screen_ts = ts;
+			      g_hal->update_screen();
+		    }
+
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
