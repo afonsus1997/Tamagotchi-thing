@@ -14,6 +14,9 @@ enum btnsIdx_e
   BUTTONS_TOTAL
 }; 
 
+extern uint8_t btn_states[3];
+extern lwbtn_btn_t btns[];
+
 void userio_process();
 void userio_init();
 

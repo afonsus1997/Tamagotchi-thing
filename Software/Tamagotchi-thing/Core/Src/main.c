@@ -184,8 +184,10 @@ int main(void)
   while (1)
   {
         // tamalib_mainloop();
-        tamalib_step();
 
+        userio_process();
+        tamalib_step();
+        hal_handler();
 	      timestamp_t ts;
         ts = g_hal->get_timestamp();
 		      if (ts - screen_ts >= 524288/4) {

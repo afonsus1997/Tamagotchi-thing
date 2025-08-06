@@ -10,6 +10,9 @@
 #include "userio.h"
 #include "rtc.h"
 
+#define SCREEN_WIDTH 128 // OLED display width, in pixels
+#define SCREEN_HEIGHT 64 // OLED display height, in pixels
+
 
 void ui_init_display();
 void ui_loop();

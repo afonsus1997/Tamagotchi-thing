@@ -87,6 +87,10 @@ void hal_play_frequency(bool_t en) {
 // HAL: Dummy Event Handler
 // ---------------------------------------------
 int hal_handler(void) {
+    
+    hw_set_button(BTN_LEFT,   lwbtn_is_btn_active(&btns[2])   ? BTN_STATE_PRESSED : BTN_STATE_RELEASED);
+    hw_set_button(BTN_MIDDLE, lwbtn_is_btn_active(&btns[1]) ? BTN_STATE_PRESSED : BTN_STATE_RELEASED);
+    hw_set_button(BTN_RIGHT,  lwbtn_is_btn_active(&btns[0])  ? BTN_STATE_PRESSED : BTN_STATE_RELEASED);
     return 0;
 }
 
@@ -144,8 +148,8 @@ void tama_draw_tamalib_screen(void) {
         for (i = 0; i < LCD_WIDTH; i++) {
             if (matrix_buffer[j][i]) {
                 u8g2_DrawBox(&u8g2,
-                             i * PIXEL_SIZE + LCD_OFFET_X,
-                             j * PIXEL_SIZE + LCD_OFFET_Y,
+                             i * PIXEL_SIZE + LCD_OFFSET_X,
+                             j * PIXEL_SIZE + LCD_OFFSET_Y,
                              PIXEL_SIZE,
                              PIXEL_SIZE);
             }

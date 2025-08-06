@@ -4,17 +4,21 @@
 #include "stm32l0xx_hal.h"
 #include "stm32l0xx_hal_gpio.h"
 
+uint8_t btn_states[3] = {0, 0, 0};
+
+
 const int buttons_id[BUTTONS_TOTAL] = {BUTTON_RIGHT, BUTTON_CENTER, BUTTON_LEFT};
 
 
 
-static lwbtn_btn_t btns[] = {
+lwbtn_btn_t btns[] = {
 
     {.arg = (void*)&buttons_id[BUTTON_RIGHT]}, 
     {.arg = (void*)&buttons_id[BUTTON_CENTER]}, 
     {.arg = (void*)&buttons_id[BUTTON_LEFT]}
 
 };
+
 
 void userio_button_event(struct lwbtn* lw, struct lwbtn_btn* btn, lwbtn_evt_t evt) {
     if (evt == LWBTN_EVT_ONPRESS) {

@@ -18,6 +18,7 @@
 #include "ui.h"
 #include "tim.h"
 #include "tama_storage.h"
+#include "userio.h"
 
 #define ENABLE_TAMA_SOUND
 #define ENABLE_AUTO_SAVE_STATUS
@@ -30,15 +31,16 @@
 #define ICON_STRIDE_Y					56
 #define ICON_OFFSET_X					24
 #define ICON_OFFSET_Y					0
-#define LCD_OFFET_X					0//16
-#define LCD_OFFET_Y					0//8
+// #define LCD_OFFET_X					16
+// #define LCD_OFFET_Y					0
 
 #define SCREEN_WIDTH   128
 #define SCREEN_HEIGHT   64
 
 // Calculate scale that fits both width and height
-#define PIXEL_SIZE   ( (SCREEN_WIDTH / LCD_WIDTH < SCREEN_HEIGHT / LCD_HEIGHT) ? \
-                       (SCREEN_WIDTH / LCD_WIDTH) : (SCREEN_HEIGHT / LCD_HEIGHT) )
+#define PIXEL_SIZE 3
+// #define PIXEL_SIZE   ( (SCREEN_WIDTH / LCD_WIDTH < SCREEN_HEIGHT / LCD_HEIGHT) ? \
+                      //  (SCREEN_WIDTH / LCD_WIDTH) : (SCREEN_HEIGHT / LCD_HEIGHT) )
 
 // Calculate offsets to center the image
 #define LCD_OFFSET_X  ((SCREEN_WIDTH - (LCD_WIDTH * PIXEL_SIZE)) / 2)

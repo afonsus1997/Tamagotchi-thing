@@ -1,6 +1,7 @@
 #include "ui.h"
 #include "mui.h"
 #include "u8g2.h"
+#include "userio.h"
 
 
 // Global display and UI objects
@@ -82,22 +83,27 @@ void ui_loop() {
 }
 
 
+
+
 void ui_process_button_event(int btn_id) {
     switch (btn_id) {
         case BUTTON_LEFT:
             // Move cursor up
-            is_redraw = 1;
-            mui_NextField(&mui);
+            // is_redraw = 1;
+            // mui_NextField(&mui);
+            btn_states[BUTTON_LEFT] = 1;
             break;
         case BUTTON_RIGHT:
             // Move cursor down
-            is_redraw = 1;
-            mui_PrevField(&mui);
+            // is_redraw = 1;
+            // mui_PrevField(&mui);
+            btn_states[BUTTON_CENTER] = 1;
             break;
         case BUTTON_CENTER:
             // Activate selected field
-            is_redraw = 1;
-            mui_SendSelect(&mui);
+            // is_redraw = 1;
+            // mui_SendSelect(&mui);
+            btn_states[BUTTON_RIGHT] = 1;
             break;
         default:
             break;
